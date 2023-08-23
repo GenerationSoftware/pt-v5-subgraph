@@ -1,0 +1,14 @@
+node_modules
+.history
+
+subgraph.yaml
+
+subgraph.optimism-goerli.yaml
+
+networks/local.json
+generated
+generated/schema.ts
+build
+
+# Matchstick binaries
+tests/.bin/

@@ -1,0 +1,26 @@
+{
+  "name": "pt-v5-subgraph",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "clean": "rm -rf build/ generated/",
+    "create-local": "graph create --node http://localhost:8020/ @GenerationSoftware/pt-v5-subgraph",
+    "remove-local": "graph remove --node http://localhost:8020/ @GenerationSoftware/pt-v5-subgraph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 @GenerationSoftware/pt-v5-subgraph",
+    "prepare:optimism-goerli": "mustache networks/optimism-goerli.json subgraph.template.yaml subgraph.optimism-goerli.yaml",
+    "gen:optimism-goerli": "graph codegen subgraph.optimism-goerli.yaml",
+    "build:optimism-goerli": "graph build subgraph.optimism-goerli.yaml",
+    "deploy:optimism-goerli:decentralized": "graph deploy --studio pt-v5-op-goerli subgraph.optimism-goerli.yaml",
+    "all-optimism-goerli:decentralized": "yarn clean && yarn prepare:optimism-goerli && yarn gen:optimism-goerli && yarn deploy:optimism-goerli:decentralized",
+    "test": "graph test"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.55.0",
+    "@graphprotocol/graph-ts": "0.31.0",
+    "mustache": "^4.2.0"
+  },
+  "devDependencies": {
+    "matchstick-as": "^0.5.2"
+  }
+}

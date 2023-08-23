@@ -1,2 +1,2 @@
-# pt-v5-account-subgraph
-PoolTogether Hyperstructure Subgraph for data related to accounts deposited in the protocol
+# pt-v5-subgraph
+PoolTogether Hyperstructure Subgraph for data related to a single chain deployment (everything except RNG auctions since those are just on mainnet).

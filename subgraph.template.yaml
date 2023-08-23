@@ -1,0 +1,70 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  {{#twabController}}
+  - kind: ethereum
+    name: TwabController
+    network: {{network}}
+    source:
+      address: "{{twabController.address}}"
+      abi: TwabController
+      startBlock: {{twabController.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Vault
+        - User
+        - Account
+        - AccountBalanceUpdate
+        - VaultBalanceUpdate
+        - AccountObservation
+        - VaultObservation
+      abis:
+        - name: TwabController
+          file: ./abis/TwabController.json
+      eventHandlers:
+        - event: DecreasedBalance(indexed address,indexed address,uint96,uint96)
+          handler: handleDecreasedBalance
+        - event: DecreasedTotalSupply(indexed address,uint96,uint96)
+          handler: handleDecreasedTotalSupply
+        - event: Delegated(indexed address,indexed address,indexed address)
+          handler: handleDelegated
+        - event: IncreasedBalance(indexed address,indexed address,uint96,uint96)
+          handler: handleIncreasedBalance
+        - event: IncreasedTotalSupply(indexed address,uint96,uint96)
+          handler: handleIncreasedTotalSupply
+        - event: ObservationRecorded(indexed address,indexed address,uint112,uint112,bool,(uint128,uint96,uint32))
+          handler: handleObservationRecorded
+        - event: TotalSupplyObservationRecorded(indexed address,uint112,uint112,bool,(uint128,uint96,uint32))
+          handler: handleTotalSupplyObservationRecorded
+      file: ./src/mappings/twab-controller.ts
+  {{/twabController}}
+  {{#prizePool}}
+  - kind: ethereum
+    name: PrizePool
+    network: {{network}}
+    source:
+      address: "{{prizePool.address}}"
+      abi: PrizePool
+      startBlock: {{prizePool.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PrizeClaim
+        - Draw
+      abis:
+        - name: PrizePool
+          file: ./abis/PrizePool.json
+      eventHandlers:
+        - event: ClaimedPrize(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
+          handler: handleClaimedPrize
+        - event: DrawClosed(indexed uint24,uint256,uint8,uint8,uint104,uint128,uint64)
+          handler: handleDrawClosed
+      file: ./src/mappings/prize-pool.ts
+  {{/prizePool}}
+  

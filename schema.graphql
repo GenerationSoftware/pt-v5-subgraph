@@ -1,0 +1,109 @@
+type Vault @entity {
+    id: Bytes!
+    balance: BigInt!
+    delegateBalance: BigInt!
+    balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "vault")
+    observations: [VaultObservation!]! @derivedFrom(field: "vault")
+    accounts: [Account!]! @derivedFrom(field: "vault")
+    prizeClaims: [PrizeClaim!]! @derivedFrom(field: "vault") # prize claims for this draw
+}
+
+type User @entity {
+    id: Bytes! # user's address
+    accounts: [Account!]! @derivedFrom(field: "user")
+}
+
+type Account @entity {
+    id: String! # vault address + user address
+    vault: Vault!
+    user: User!
+    delegate: Account # account to whom this account delegates their balances
+    balance: BigInt! # balance in account
+    delegateBalance: BigInt! # amount of balance delegated to this account
+    balanceUpdates: [AccountBalanceUpdate!]! @derivedFrom(field: "account")
+    observations: [AccountObservation!]! @derivedFrom(field: "account")
+    delegators: [Account!]! @derivedFrom(field: "delegate") # accounts who delegated to this account
+    prizesWon: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the winner
+    prizesReceived: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the prize recipient
+    fees: [PrizeClaim!]! @derivedFrom(field: "feeRecipient") # prize claim fees earned by this user
+}
+
+type Draw @entity {
+    id: String! # draw ID
+    drawId: BigInt! # numerical draw ID for sorting
+    numTiers: Int!
+    nextNumTiers: Int!
+    prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
+    txHash: String!
+}
+
+type PrizeClaim @entity {
+    id: String! # vault ID + winner ID + draw ID + tier + prizeIndex
+    draw: Draw!
+    vault: Vault!
+    winner: Account!
+    recipient: Account!
+    tier: Int!
+    prizeIndex: BigInt!
+    payout: BigInt!
+    fee: BigInt!
+    feeRecipient: Account!
+    timestamp: BigInt!
+    txHash: String!
+}
+
+type AccountBalanceUpdate implements BalanceUpdate @entity {
+    id: ID!
+    amount: BigInt!
+    delegateAmount: BigInt!
+    balance: BigInt!
+    delegateBalance: BigInt!
+    timestamp: BigInt!
+    account: Account!
+}
+
+type VaultBalanceUpdate implements BalanceUpdate @entity {
+    id: ID!
+    amount: BigInt!
+    delegateAmount: BigInt!
+    balance: BigInt!
+    delegateBalance: BigInt!
+    timestamp: BigInt!
+    vault: Vault!
+}
+
+type AccountObservation implements Observation @entity {
+    id: ID!
+    account: Account!
+    balance: BigInt!
+    delegateBalance: BigInt!
+    cumulativeBalance: BigInt!
+    timestamp: BigInt!
+    isNew: Boolean!
+}
+
+type VaultObservation implements Observation @entity {
+    id: ID!
+    vault: Vault!
+    balance: BigInt!
+    delegateBalance: BigInt!
+    cumulativeBalance: BigInt!
+    timestamp: BigInt!
+    isNew: Boolean!
+}
+
+interface BalanceUpdate {
+    amount: BigInt!
+    delegateAmount: BigInt!
+    balance: BigInt!
+    delegateBalance: BigInt!
+    timestamp: BigInt!
+    txHash: String!
+}
+
+interface Observation {
+    balance: BigInt!
+    delegateBalance: BigInt!
+    cumulativeBalance: BigInt!
+    timestamp: BigInt!
+}
