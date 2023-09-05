@@ -2,14 +2,14 @@
   {
     "inputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "_periodLength",
-        "type": "uint32"
+        "type": "uint48"
       },
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "_periodOffset",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "stateMutability": "nonpayable",
@@ -23,9 +23,9 @@
         "type": "uint112"
       },
       {
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "amount",
-        "type": "uint96"
+        "type": "uint112"
       },
       {
         "internalType": "string",
@@ -49,9 +49,9 @@
         "type": "uint112"
       },
       {
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "delegateAmount",
-        "type": "uint96"
+        "type": "uint112"
       },
       {
         "internalType": "string",
@@ -65,14 +65,14 @@
   {
     "inputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "requestedTimestamp",
-        "type": "uint32"
+        "type": "uint48"
       },
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "oldestTimestamp",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "InsufficientHistory",
@@ -102,9 +102,9 @@
   {
     "inputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "periodOffset",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "PeriodOffsetInFuture",
@@ -138,6 +138,11 @@
     "type": "error"
   },
   {
+    "inputs": [],
+    "name": "TransferToZeroAddress",
+    "type": "error"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -154,15 +159,15 @@
       },
       {
         "indexed": false,
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "amount",
-        "type": "uint96"
+        "type": "uint112"
       },
       {
         "indexed": false,
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "delegateAmount",
-        "type": "uint96"
+        "type": "uint112"
       }
     ],
     "name": "DecreasedBalance",
@@ -179,15 +184,15 @@
       },
       {
         "indexed": false,
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "amount",
-        "type": "uint96"
+        "type": "uint112"
       },
       {
         "indexed": false,
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "delegateAmount",
-        "type": "uint96"
+        "type": "uint112"
       }
     ],
     "name": "DecreasedTotalSupply",
@@ -235,15 +240,15 @@
       },
       {
         "indexed": false,
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "amount",
-        "type": "uint96"
+        "type": "uint112"
       },
       {
         "indexed": false,
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "delegateAmount",
-        "type": "uint96"
+        "type": "uint112"
       }
     ],
     "name": "IncreasedBalance",
@@ -260,15 +265,15 @@
       },
       {
         "indexed": false,
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "amount",
-        "type": "uint96"
+        "type": "uint112"
       },
       {
         "indexed": false,
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "delegateAmount",
-        "type": "uint96"
+        "type": "uint112"
       }
     ],
     "name": "IncreasedTotalSupply",
@@ -310,19 +315,14 @@
       {
         "components": [
           {
-            "internalType": "uint128",
+            "internalType": "uint160",
             "name": "cumulativeBalance",
-            "type": "uint128"
+            "type": "uint160"
           },
           {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
+            "internalType": "uint48",
             "name": "timestamp",
-            "type": "uint32"
+            "type": "uint48"
           }
         ],
         "indexed": false,
@@ -364,19 +364,14 @@
       {
         "components": [
           {
-            "internalType": "uint128",
+            "internalType": "uint160",
             "name": "cumulativeBalance",
-            "type": "uint128"
+            "type": "uint160"
           },
           {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
+            "internalType": "uint48",
             "name": "timestamp",
-            "type": "uint32"
+            "type": "uint48"
           }
         ],
         "indexed": false,
@@ -393,9 +388,9 @@
     "name": "PERIOD_LENGTH",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -406,9 +401,9 @@
     "name": "PERIOD_OFFSET",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -446,9 +441,9 @@
         "type": "address"
       },
       {
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "_amount",
-        "type": "uint96"
+        "type": "uint112"
       }
     ],
     "name": "burn",
@@ -461,9 +456,9 @@
     "name": "currentOverwritePeriodStartedAt",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -582,19 +577,14 @@
           {
             "components": [
               {
-                "internalType": "uint128",
+                "internalType": "uint160",
                 "name": "cumulativeBalance",
-                "type": "uint128"
+                "type": "uint160"
               },
               {
-                "internalType": "uint96",
-                "name": "balance",
-                "type": "uint96"
-              },
-              {
-                "internalType": "uint32",
+                "internalType": "uint48",
                 "name": "timestamp",
-                "type": "uint32"
+                "type": "uint48"
               }
             ],
             "internalType": "struct ObservationLib.Observation[9600]",
@@ -623,9 +613,9 @@
         "type": "address"
       },
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "periodEndOnOrAfterTime",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "getBalanceAt",
@@ -662,19 +652,14 @@
       {
         "components": [
           {
-            "internalType": "uint128",
+            "internalType": "uint160",
             "name": "cumulativeBalance",
-            "type": "uint128"
+            "type": "uint160"
           },
           {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
+            "internalType": "uint48",
             "name": "timestamp",
-            "type": "uint32"
+            "type": "uint48"
           }
         ],
         "internalType": "struct ObservationLib.Observation",
@@ -703,19 +688,14 @@
       {
         "components": [
           {
-            "internalType": "uint128",
+            "internalType": "uint160",
             "name": "cumulativeBalance",
-            "type": "uint128"
+            "type": "uint160"
           },
           {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
+            "internalType": "uint48",
             "name": "timestamp",
-            "type": "uint32"
+            "type": "uint48"
           }
         ],
         "internalType": "struct ObservationLib.Observation",
@@ -749,19 +729,14 @@
       {
         "components": [
           {
-            "internalType": "uint128",
+            "internalType": "uint160",
             "name": "cumulativeBalance",
-            "type": "uint128"
+            "type": "uint160"
           },
           {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
+            "internalType": "uint48",
             "name": "timestamp",
-            "type": "uint32"
+            "type": "uint48"
           }
         ],
         "internalType": "struct ObservationLib.Observation",
@@ -790,19 +765,14 @@
       {
         "components": [
           {
-            "internalType": "uint128",
+            "internalType": "uint160",
             "name": "cumulativeBalance",
-            "type": "uint128"
+            "type": "uint160"
           },
           {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
+            "internalType": "uint48",
             "name": "timestamp",
-            "type": "uint32"
+            "type": "uint48"
           }
         ],
         "internalType": "struct ObservationLib.Observation",
@@ -816,17 +786,17 @@
   {
     "inputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "time",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "getTimestampPeriod",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -874,19 +844,14 @@
           {
             "components": [
               {
-                "internalType": "uint128",
+                "internalType": "uint160",
                 "name": "cumulativeBalance",
-                "type": "uint128"
+                "type": "uint160"
               },
               {
-                "internalType": "uint96",
-                "name": "balance",
-                "type": "uint96"
-              },
-              {
-                "internalType": "uint32",
+                "internalType": "uint48",
                 "name": "timestamp",
-                "type": "uint32"
+                "type": "uint48"
               }
             ],
             "internalType": "struct ObservationLib.Observation[9600]",
@@ -910,9 +875,9 @@
         "type": "address"
       },
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "periodEndOnOrAfterTime",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "getTotalSupplyAt",
@@ -934,14 +899,14 @@
         "type": "address"
       },
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "startTime",
-        "type": "uint32"
+        "type": "uint48"
       },
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "endTime",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "getTotalSupplyTwabBetween",
@@ -968,14 +933,14 @@
         "type": "address"
       },
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "startTime",
-        "type": "uint32"
+        "type": "uint48"
       },
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "endTime",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "getTwabBetween",
@@ -992,9 +957,9 @@
   {
     "inputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "time",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "hasFinalized",
@@ -1016,9 +981,9 @@
         "type": "address"
       },
       {
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "_amount",
-        "type": "uint96"
+        "type": "uint112"
       }
     ],
     "name": "mint",
@@ -1029,17 +994,17 @@
   {
     "inputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "_timestamp",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "name": "periodEndOnOrAfter",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -1109,9 +1074,9 @@
         "type": "address"
       },
       {
-        "internalType": "uint96",
+        "internalType": "uint112",
         "name": "_amount",
-        "type": "uint96"
+        "type": "uint112"
       }
     ],
     "name": "transfer",

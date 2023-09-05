@@ -14,11 +14,6 @@
             "type": "address"
           },
           {
-            "internalType": "address",
-            "name": "drawManager",
-            "type": "address"
-          },
-          {
             "internalType": "uint32",
             "name": "drawPeriodSeconds",
             "type": "uint32"
@@ -143,7 +138,7 @@
   },
   {
     "inputs": [],
-    "name": "DrawManagerAlreadySet",
+    "name": "DrawManagerIsZeroAddress",
     "type": "error"
   },
   {
@@ -181,6 +176,21 @@
       }
     ],
     "name": "FeeTooLarge",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "FirstDrawStartsInPast",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "IncompatibleTwabPeriodLength",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "IncompatibleTwabPeriodOffset",
     "type": "error"
   },
   {
@@ -293,11 +303,6 @@
   {
     "inputs": [],
     "name": "NoClosedDraw",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NotDeployer",
     "type": "error"
   },
   {
@@ -694,6 +699,25 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": false,
         "internalType": "uint256",
         "name": "amount",
@@ -1027,14 +1051,14 @@
         "type": "address"
       },
       {
-        "internalType": "uint16",
+        "internalType": "uint24",
         "name": "_startDrawIdInclusive",
-        "type": "uint16"
+        "type": "uint24"
       },
       {
-        "internalType": "uint16",
+        "internalType": "uint24",
         "name": "_endDrawIdInclusive",
-        "type": "uint16"
+        "type": "uint24"
       }
     ],
     "name": "getContributedBetween",
@@ -1085,9 +1109,9 @@
     "name": "getTierAccrualDurationInDraws",
     "outputs": [
       {
-        "internalType": "uint16",
+        "internalType": "uint24",
         "name": "",
-        "type": "uint16"
+        "type": "uint24"
       }
     ],
     "stateMutability": "view",
@@ -1177,14 +1201,14 @@
   {
     "inputs": [
       {
-        "internalType": "uint16",
+        "internalType": "uint24",
         "name": "_startDrawIdInclusive",
-        "type": "uint16"
+        "type": "uint24"
       },
       {
-        "internalType": "uint16",
+        "internalType": "uint24",
         "name": "_endDrawIdInclusive",
-        "type": "uint16"
+        "type": "uint24"
       }
     ],
     "name": "getTotalContributedBetween",
@@ -1440,6 +1464,19 @@
   },
   {
     "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "prizeToken",
     "outputs": [
       {
@@ -1462,6 +1499,13 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -1553,6 +1597,19 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
