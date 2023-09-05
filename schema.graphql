@@ -1,5 +1,19 @@
+#############################################################################
+# PoolTogether Subgraph Schema
+# --------------------------------------------------------------------------
+# Notes:
+# - Entity IDs are keccak256 hashes of one or multiple fields represented in 
+# byte form and concatenated in the order specified next to the ID field in
+# this document. This is to save storage and query costs since there will
+# be less data in the ID field compared to if we did not hash the composite
+# ID.
+# - Composite Hash IDs are denoted by `compositeHashId(...fields)`
+# 
+#############################################################################
+
 type Vault @entity {
-    id: Bytes!
+    id: Bytes! # Vault.address
+    address: Bytes!
     balance: BigInt!
     delegateBalance: BigInt!
     balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "vault")
@@ -9,12 +23,13 @@ type Vault @entity {
 }
 
 type User @entity {
-    id: Bytes! # user's address
+    id: Bytes! # User.address
+    address: Bytes!
     accounts: [Account!]! @derivedFrom(field: "user")
 }
 
 type Account @entity {
-    id: String! # vault address + user address
+    id: Bytes! # compositeHashId(Vault.address, User.address)
     vault: Vault!
     user: User!
     delegate: Account # account to whom this account delegates their balances
@@ -29,7 +44,7 @@ type Account @entity {
 }
 
 type Draw @entity {
-    id: String! # draw ID
+    id: Bytes! # Draw.drawId as bytes
     drawId: BigInt! # numerical draw ID for sorting
     numTiers: Int!
     nextNumTiers: Int!
@@ -38,22 +53,21 @@ type Draw @entity {
 }
 
 type PrizeClaim @entity {
-    id: String! # vault ID + winner ID + draw ID + tier + prizeIndex
-    draw: Draw!
-    vault: Vault!
+    id: Bytes! # compositeHashId(Vault.address, Winner.address, Draw.id, PrizeClaim.tier, PrizeClaim.prizeIndex)
     winner: Account!
-    recipient: Account!
+    recipient: Bytes! # address (where the prize was sent)
+    draw: Draw!
     tier: Int!
     prizeIndex: BigInt!
     payout: BigInt!
     fee: BigInt!
-    feeRecipient: Account!
+    feeRecipient: Bytes! # address (who gets the claim fee)
     timestamp: BigInt!
-    txHash: String!
+    txHash: Bytes!    
 }
 
 type AccountBalanceUpdate implements BalanceUpdate @entity {
-    id: ID!
+    id: Bytes! # compositeHashId(tx.hash, event.logIndex)
     amount: BigInt!
     delegateAmount: BigInt!
     balance: BigInt!
@@ -63,7 +77,7 @@ type AccountBalanceUpdate implements BalanceUpdate @entity {
 }
 
 type VaultBalanceUpdate implements BalanceUpdate @entity {
-    id: ID!
+    id: Bytes! # compositeHashId(tx.hash, event.logIndex)
     amount: BigInt!
     delegateAmount: BigInt!
     balance: BigInt!
@@ -73,7 +87,7 @@ type VaultBalanceUpdate implements BalanceUpdate @entity {
 }
 
 type AccountObservation implements Observation @entity {
-    id: ID!
+    id: Bytes! # compositeHashId(tx.hash, event.logIndex)
     account: Account!
     balance: BigInt!
     delegateBalance: BigInt!
@@ -83,7 +97,7 @@ type AccountObservation implements Observation @entity {
 }
 
 type VaultObservation implements Observation @entity {
-    id: ID!
+    id: Bytes! # compositeHashId(tx.hash, event.logIndex)
     vault: Vault!
     balance: BigInt!
     delegateBalance: BigInt!
