@@ -45,15 +45,16 @@ type Account @entity {
 
 type Draw @entity {
     id: Bytes! # Draw.drawId as bytes
-    drawId: BigInt! # numerical draw ID for sorting
+    drawId: Int! # numerical draw ID for sorting
     numTiers: Int!
     nextNumTiers: Int!
     prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
+    closedAtTimestamp: BigInt! 
     txHash: String!
 }
 
 type PrizeClaim @entity {
-    id: Bytes! # compositeHashId(Vault.address, Winner.address, Draw.id, PrizeClaim.tier, PrizeClaim.prizeIndex)
+    id: Bytes! # compositeHashId(Vault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
     winner: Account!
     recipient: Bytes! # address (where the prize was sent)
     draw: Draw!
