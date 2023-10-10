@@ -19,9 +19,9 @@
             "type": "uint32"
           },
           {
-            "internalType": "uint64",
-            "name": "firstDrawStartsAt",
-            "type": "uint64"
+            "internalType": "uint48",
+            "name": "firstDrawOpensAt",
+            "type": "uint48"
           },
           {
             "internalType": "SD1x18",
@@ -65,6 +65,17 @@
   {
     "inputs": [
       {
+        "internalType": "uint48",
+        "name": "drawClosesAt",
+        "type": "uint48"
+      }
+    ],
+    "name": "AwardingDrawNotClosed",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "caller",
         "type": "address"
@@ -76,6 +87,11 @@
       }
     ],
     "name": "CallerNotDrawManager",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ClaimPeriodExpired",
     "type": "error"
   },
   {
@@ -133,28 +149,12 @@
         "type": "uint24"
       }
     ],
-    "name": "DrawClosed",
+    "name": "DrawAwarded",
     "type": "error"
   },
   {
     "inputs": [],
     "name": "DrawManagerIsZeroAddress",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint64",
-        "name": "drawEndsAt",
-        "type": "uint64"
-      },
-      {
-        "internalType": "uint64",
-        "name": "errorTimestamp",
-        "type": "uint64"
-      }
-    ],
-    "name": "DrawNotFinished",
     "type": "error"
   },
   {
@@ -180,7 +180,7 @@
   },
   {
     "inputs": [],
-    "name": "FirstDrawStartsInPast",
+    "name": "FirstDrawOpensInPast",
     "type": "error"
   },
   {
@@ -302,7 +302,7 @@
   },
   {
     "inputs": [],
-    "name": "NoClosedDraw",
+    "name": "NoDrawsAwarded",
     "type": "error"
   },
   {
@@ -515,6 +515,25 @@
       {
         "indexed": true,
         "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "AllocateRewardFromReserve",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "vault",
         "type": "address"
       },
@@ -632,13 +651,13 @@
       {
         "indexed": false,
         "internalType": "uint8",
-        "name": "numTiers",
+        "name": "lastNumTiers",
         "type": "uint8"
       },
       {
         "indexed": false,
         "internalType": "uint8",
-        "name": "nextNumTiers",
+        "name": "numTiers",
         "type": "uint8"
       },
       {
@@ -655,12 +674,12 @@
       },
       {
         "indexed": false,
-        "internalType": "uint64",
-        "name": "drawStartedAt",
-        "type": "uint64"
+        "internalType": "uint48",
+        "name": "drawOpenedAt",
+        "type": "uint48"
       }
     ],
-    "name": "DrawClosed",
+    "name": "DrawAwarded",
     "type": "event"
   },
   {
@@ -733,6 +752,12 @@
       {
         "indexed": true,
         "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "to",
         "type": "address"
       },
@@ -749,26 +774,7 @@
         "type": "uint256"
       }
     ],
-    "name": "WithdrawClaimRewards",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "WithdrawReserve",
+    "name": "WithdrawRewards",
     "type": "event"
   },
   {
@@ -788,19 +794,37 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_claimer",
+        "name": "_to",
         "type": "address"
+      },
+      {
+        "internalType": "uint96",
+        "name": "_amount",
+        "type": "uint96"
       }
     ],
-    "name": "balanceOfClaimRewards",
-    "outputs": [
+    "name": "allocateRewardFromReserve",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "winningRandomNumber_",
         "type": "uint256"
       }
     ],
-    "stateMutability": "view",
+    "name": "awardDraw",
+    "outputs": [
+      {
+        "internalType": "uint24",
+        "name": "",
+        "type": "uint24"
+      }
+    ],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -814,14 +838,14 @@
     "name": "calculateTierTwabTimestamps",
     "outputs": [
       {
-        "internalType": "uint64",
+        "internalType": "uint48",
         "name": "startTimestamp",
-        "type": "uint64"
+        "type": "uint48"
       },
       {
-        "internalType": "uint64",
+        "internalType": "uint48",
         "name": "endTimestamp",
-        "type": "uint64"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -887,25 +911,6 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "winningRandomNumber_",
-        "type": "uint256"
-      }
-    ],
-    "name": "closeDraw",
-    "outputs": [
-      {
-        "internalType": "uint24",
-        "name": "",
-        "type": "uint24"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint32",
         "name": "_claimCount",
         "type": "uint32"
@@ -960,6 +965,25 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint24",
+        "name": "drawId",
+        "type": "uint24"
+      }
+    ],
+    "name": "drawClosesAt",
+    "outputs": [
+      {
+        "internalType": "uint48",
+        "name": "",
+        "type": "uint48"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "drawManager",
     "outputs": [
@@ -967,6 +991,25 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint24",
+        "name": "drawId",
+        "type": "uint24"
+      }
+    ],
+    "name": "drawOpensAt",
+    "outputs": [
+      {
+        "internalType": "uint48",
+        "name": "",
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -1032,12 +1075,12 @@
   },
   {
     "inputs": [],
-    "name": "firstDrawStartsAt",
+    "name": "firstDrawOpensAt",
     "outputs": [
       {
-        "internalType": "uint64",
+        "internalType": "uint48",
         "name": "",
-        "type": "uint64"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -1074,12 +1117,25 @@
   },
   {
     "inputs": [],
-    "name": "getLastClosedDrawId",
+    "name": "getDrawIdToAward",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint24",
         "name": "",
-        "type": "uint256"
+        "type": "uint24"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getLastAwardedDrawId",
+    "outputs": [
+      {
+        "internalType": "uint24",
+        "name": "",
+        "type": "uint24"
       }
     ],
     "stateMutability": "view",
@@ -1224,19 +1280,6 @@
   },
   {
     "inputs": [],
-    "name": "getTotalContributionsForClosedDraw",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "getTotalShares",
     "outputs": [
       {
@@ -1338,8 +1381,14 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "hasOpenDrawFinished",
+    "inputs": [
+      {
+        "internalType": "uint24",
+        "name": "drawId",
+        "type": "uint24"
+      }
+    ],
+    "name": "isDrawFinalized",
     "outputs": [
       {
         "internalType": "bool",
@@ -1386,38 +1435,12 @@
   },
   {
     "inputs": [],
-    "name": "lastClosedDrawAwardedAt",
+    "name": "lastAwardedDrawAwardedAt",
     "outputs": [
       {
-        "internalType": "uint64",
+        "internalType": "uint48",
         "name": "",
-        "type": "uint64"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lastClosedDrawEndedAt",
-    "outputs": [
-      {
-        "internalType": "uint64",
-        "name": "",
-        "type": "uint64"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lastClosedDrawStartedAt",
-    "outputs": [
-      {
-        "internalType": "uint64",
-        "name": "",
-        "type": "uint64"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",
@@ -1438,38 +1461,25 @@
   },
   {
     "inputs": [],
-    "name": "openDrawEndsAt",
-    "outputs": [
-      {
-        "internalType": "uint64",
-        "name": "",
-        "type": "uint64"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "openDrawStartedAt",
-    "outputs": [
-      {
-        "internalType": "uint64",
-        "name": "",
-        "type": "uint64"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "owner",
     "outputs": [
       {
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pendingReserveContributions",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -1523,25 +1533,31 @@
   },
   {
     "inputs": [],
-    "name": "reserveForOpenDraw",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "reserveShares",
     "outputs": [
       {
         "internalType": "uint8",
         "name": "",
         "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_recipient",
+        "type": "address"
+      }
+    ],
+    "name": "rewardBalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -1672,25 +1688,7 @@
         "type": "uint256"
       }
     ],
-    "name": "withdrawClaimRewards",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_to",
-        "type": "address"
-      },
-      {
-        "internalType": "uint96",
-        "name": "_amount",
-        "type": "uint96"
-      }
-    ],
-    "name": "withdrawReserve",
+    "name": "withdrawRewards",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

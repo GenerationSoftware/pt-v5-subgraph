@@ -12,4 +12,5 @@ export const generateHashId = (...keys: Bytes[]): Bytes => {
   return crypto.keccak256(concatenated);
 };
 
-export const generateUniqueLogId = (event: ethereum.Event): Bytes => generateHashId(event.transaction.hash, Bytes.fromBigInt(event.logIndex));
+export const generateUniqueLogId = (event: ethereum.Event): Bytes =>
+  generateHashId(event.transaction.hash, Bytes.fromBigInt(event.logIndex));

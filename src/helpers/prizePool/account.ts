@@ -1,5 +1,5 @@
-import { Bytes } from "@graphprotocol/graph-ts";
-import { Account } from "../../../generated/schema";
+import { Bytes } from '@graphprotocol/graph-ts';
+import { Account } from '../../../generated/schema';
 
 export const loadOrCreateAccount = (accountId: Bytes): Account => {
   const account = Account.load(accountId);

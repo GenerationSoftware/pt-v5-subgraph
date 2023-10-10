@@ -7,11 +7,6 @@
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "_rngAuctionRelayer",
-        "type": "address"
-      },
-      {
         "internalType": "uint64",
         "name": "auctionDurationSeconds_",
         "type": "uint64"
@@ -19,6 +14,16 @@
       {
         "internalType": "uint64",
         "name": "auctionTargetTime_",
+        "type": "uint64"
+      },
+      {
+        "internalType": "address",
+        "name": "_rngAuctionRelayer",
+        "type": "address"
+      },
+      {
+        "internalType": "UD2x18",
+        "name": "firstAuctionTargetRewardFraction_",
         "type": "uint64"
       },
       {
@@ -135,6 +140,11 @@
     "type": "error"
   },
   {
+    "inputs": [],
+    "name": "TargetRewardFractionGTOne",
+    "type": "error"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -173,7 +183,7 @@
         "type": "uint256"
       }
     ],
-    "name": "AuctionRewardDistributed",
+    "name": "AuctionRewardAllocated",
     "type": "event"
   },
   {

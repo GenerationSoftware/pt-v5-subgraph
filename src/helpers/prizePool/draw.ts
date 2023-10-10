@@ -1,4 +1,4 @@
-import { Draw } from "../../../generated/schema";
+import { Draw } from '../../../generated/schema';
 
 export const loadOrCreateDraw = (drawId: i32): Draw => {
   const draw = Draw.load(drawId.toString());

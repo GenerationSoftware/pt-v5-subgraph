@@ -1,11 +1,11 @@
 {
   "network": "optimism-goerli",
   "twabController": {
-    "address": "0x1F4823b8254bB008C36961f64D50e5a0e824949C",
-    "startBlock": "13672758"
+    "address": "0xe7dc3f91d2682a99e40c98ac5a8791461418234f",
+    "startBlock": "15600000"
   },
   "prizePool": {
-    "address": "0x6A62cd64Acb8bAb35C21e9114A7F9d97e7FaB987",
-    "startBlock": "13672758"
+    "address": "0xb91194FB89561c2Bd7fC26bE68e5EAe5b00f5320",
+    "startBlock": "15600000"
   }
 }

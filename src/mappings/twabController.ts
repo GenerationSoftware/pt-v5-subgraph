@@ -29,7 +29,14 @@ export function handleDecreasedBalance(event: DecreasedBalance): void {
   const amount = event.params.amount;
   const delegateAmount = event.params.delegateAmount;
   const updateId = generateUniqueLogId(event);
-  updateAccountBalance(updateId, vault, user, amount.neg(), delegateAmount.neg(), event.block.timestamp);
+  updateAccountBalance(
+    updateId,
+    vault,
+    user,
+    amount.neg(),
+    delegateAmount.neg(),
+    event.block.timestamp,
+  );
 }
 
 export function handleIncreasedTotalSupply(event: IncreasedTotalSupply): void {
@@ -68,7 +75,16 @@ export function handleObservationRecorded(event: ObservationRecorded): void {
   const delegateBalance = event.params.delegateBalance;
   const observation = event.params.observation;
   const observationId = generateUniqueLogId(event);
-  createAccountObservation(observationId, vault, user, balance, delegateBalance, observation.cumulativeBalance, isNew, event.block.timestamp);
+  createAccountObservation(
+    observationId,
+    vault,
+    user,
+    balance,
+    delegateBalance,
+    observation.cumulativeBalance,
+    isNew,
+    event.block.timestamp,
+  );
 }
 
 export function handleTotalSupplyObservationRecorded(event: TotalSupplyObservationRecorded): void {
@@ -78,5 +94,13 @@ export function handleTotalSupplyObservationRecorded(event: TotalSupplyObservati
   const delegateBalance = event.params.delegateBalance;
   const observation = event.params.observation;
   const observationId = generateUniqueLogId(event);
-  createVaultObservation(observationId, vault, balance, delegateBalance, observation.cumulativeBalance, isNew, event.block.timestamp);
+  createVaultObservation(
+    observationId,
+    vault,
+    balance,
+    delegateBalance,
+    observation.cumulativeBalance,
+    isNew,
+    event.block.timestamp,
+  );
 }

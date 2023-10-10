@@ -1,5 +1,5 @@
-import { Bytes } from "@graphprotocol/graph-ts";
-import { Vault } from "../../../generated/schema";
+import { Bytes } from '@graphprotocol/graph-ts';
+import { Vault } from '../../../generated/schema';
 
 export const loadOrCreateVault = (vaultId: Bytes): Vault => {
   const vault = Vault.load(vaultId);

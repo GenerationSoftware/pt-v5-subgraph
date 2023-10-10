@@ -1,10 +1,10 @@
-import { Bytes, BigInt, Address } from "@graphprotocol/graph-ts";
+import { Bytes, BigInt, Address } from '@graphprotocol/graph-ts';
 
-import { PrizeClaim } from "../../../generated/schema";
-import { loadOrCreateDraw } from "./draw";
-import { loadOrCreateVault } from "./vault";
-import { loadOrCreateAccount } from "./account";
-import { generateCompositeId } from "../common";
+import { PrizeClaim } from '../../../generated/schema';
+import { loadOrCreateDraw } from './draw';
+import { loadOrCreateVault } from './vault';
+import { loadOrCreateAccount } from './account';
+import { generateHashId } from '../common';
 
 // Generate ID for PrizeClaim entity
 export const generateCompositePrizeClaimId = (
@@ -14,7 +14,7 @@ export const generateCompositePrizeClaimId = (
   _drawId: string,
   _tier: string,
   _prizeIndex: string,
-): string => generateCompositeId(_vaultId, _winnerId, _recipientId, _drawId, _tier, _prizeIndex);
+): string => generateHashId(_vaultId, _winnerId, _recipientId, _drawId, _tier, _prizeIndex);
 
 export const createPrizeClaim = (
   _vaultId: Address,
@@ -26,7 +26,7 @@ export const createPrizeClaim = (
   _payout: BigInt,
   _fee: BigInt,
   _feeRecipientId: Bytes,
-  _timestamp: BigInt
+  _timestamp: BigInt,
 ): PrizeClaim => {
   const prizeClaimId = generateCompositePrizeClaimId(
     _vaultId.toHexString(),
@@ -34,7 +34,7 @@ export const createPrizeClaim = (
     _recipientId.toHexString(),
     _drawId.toString(),
     _tier.toString(),
-    _prizeIndex.toString()
+    _prizeIndex.toString(),
   );
 
   // Ensure other entities are initialized

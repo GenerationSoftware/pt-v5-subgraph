@@ -36,11 +36,11 @@ dataSources:
           handler: handleIncreasedBalance
         - event: IncreasedTotalSupply(indexed address,uint96,uint96)
           handler: handleIncreasedTotalSupply
-        - event: ObservationRecorded(indexed address,indexed address,uint112,uint112,bool,(uint128,uint96,uint32))
+        - event: ObservationRecorded(indexed address,indexed address,uint96,uint96,bool,(uint128,uint96,uint32))
           handler: handleObservationRecorded
-        - event: TotalSupplyObservationRecorded(indexed address,uint112,uint112,bool,(uint128,uint96,uint32))
+        - event: TotalSupplyObservationRecorded(indexed address,uint96,uint96,bool,(uint128,uint96,uint32))
           handler: handleTotalSupplyObservationRecorded
-      file: ./src/mappings/twab-controller.ts
+      file: ./src/mappings/twabController.ts
   {{/twabController}}
   {{#prizePool}}
   - kind: ethereum
@@ -63,8 +63,8 @@ dataSources:
       eventHandlers:
         - event: ClaimedPrize(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
           handler: handleClaimedPrize
-        - event: DrawClosed(indexed uint24,uint256,uint8,uint8,uint104,uint128,uint64)
+        - event: DrawAwarded(indexed uint24,uint256,uint8,uint8,uint104,uint128,uint48)
           handler: handleDrawClosed
-      file: ./src/mappings/prize-pool.ts
+      file: ./src/mappings/prizePool.ts
   {{/prizePool}}
   

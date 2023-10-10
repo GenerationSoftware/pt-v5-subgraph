@@ -2,123 +2,124 @@
 # PoolTogether Subgraph Schema
 # --------------------------------------------------------------------------
 # Notes:
-# - Entity IDs are keccak256 hashes of one or multiple fields represented in 
+# - Entity IDs are keccak256 hashes of one or multiple fields represented in
 # byte form and concatenated in the order specified next to the ID field in
 # this document. This is to save storage and query costs since there will
 # be less data in the ID field compared to if we did not hash the composite
 # ID.
 # - Composite Hash IDs are denoted by `compositeHashId(...fields)`
-# 
+#
 #############################################################################
 
 type Vault @entity {
-    id: Bytes! # Vault.address
-    address: Bytes!
-    balance: BigInt!
-    delegateBalance: BigInt!
-    balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "vault")
-    observations: [VaultObservation!]! @derivedFrom(field: "vault")
-    accounts: [Account!]! @derivedFrom(field: "vault")
-    prizeClaims: [PrizeClaim!]! @derivedFrom(field: "vault") # prize claims for this draw
+  id: Bytes! # Vault.address
+  address: Bytes!
+  balance: BigInt!
+  delegateBalance: BigInt!
+  balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "vault")
+  observations: [VaultObservation!]! @derivedFrom(field: "vault")
+  accounts: [Account!]! @derivedFrom(field: "vault")
+  prizeClaims: [PrizeClaim!]! @derivedFrom(field: "vault") # prize claims for this vault
 }
 
 type User @entity {
-    id: Bytes! # User.address
-    address: Bytes!
-    accounts: [Account!]! @derivedFrom(field: "user")
+  id: Bytes! # User.address
+  address: Bytes!
+  accounts: [Account!]! @derivedFrom(field: "user")
 }
 
 type Account @entity {
-    id: Bytes! # compositeHashId(Vault.address, User.address)
-    vault: Vault!
-    user: User!
-    delegate: Account # account to whom this account delegates their balances
-    balance: BigInt! # balance in account
-    delegateBalance: BigInt! # amount of balance delegated to this account
-    balanceUpdates: [AccountBalanceUpdate!]! @derivedFrom(field: "account")
-    observations: [AccountObservation!]! @derivedFrom(field: "account")
-    delegators: [Account!]! @derivedFrom(field: "delegate") # accounts who delegated to this account
-    prizesWon: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the winner
-    prizesReceived: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the prize recipient
-    fees: [PrizeClaim!]! @derivedFrom(field: "feeRecipient") # prize claim fees earned by this user
+  id: Bytes! # compositeHashId(Vault.address, User.address)
+  vault: Vault!
+  user: User!
+  delegate: Account # account to whom this account delegates their balances
+  balance: BigInt! # balance in account
+  delegateBalance: BigInt! # amount of balance delegated to this account
+  balanceUpdates: [AccountBalanceUpdate!]! @derivedFrom(field: "account")
+  observations: [AccountObservation!]! @derivedFrom(field: "account")
+  delegators: [Account!]! @derivedFrom(field: "delegate") # accounts who delegated to this account
+  prizesWon: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the winner
+  prizesReceived: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the prize recipient
+  fees: [PrizeClaim!]! @derivedFrom(field: "feeRecipient") # prize claim fees earned by this user
 }
 
 type Draw @entity {
-    id: Bytes! # Draw.drawId as bytes
-    drawId: Int! # numerical draw ID for sorting
-    numTiers: Int!
-    nextNumTiers: Int!
-    prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
-    closedAtTimestamp: BigInt! 
-    txHash: String!
+  id: Bytes! # Draw.drawId as bytes
+  drawId: Int! # numerical draw ID for sorting
+  numTiers: Int!
+  nextNumTiers: Int!
+  prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
+  closedAtTimestamp: BigInt!
+  txHash: String!
 }
 
 type PrizeClaim @entity {
-    id: Bytes! # compositeHashId(Vault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
-    winner: Account!
-    recipient: Bytes! # address (where the prize was sent)
-    draw: Draw!
-    tier: Int!
-    prizeIndex: BigInt!
-    payout: BigInt!
-    fee: BigInt!
-    feeRecipient: Bytes! # address (who gets the claim fee)
-    timestamp: BigInt!
-    txHash: Bytes!    
+  id: Bytes! # compositeHashId(Vault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
+  vault: Vault!
+  winner: Account!
+  recipient: Bytes! # address (where the prize was sent)
+  draw: Draw!
+  tier: Int!
+  prizeIndex: BigInt!
+  payout: BigInt!
+  fee: BigInt!
+  feeRecipient: Account! # address (who gets the claim fee)
+  timestamp: BigInt!
+  txHash: Bytes!
 }
 
 type AccountBalanceUpdate implements BalanceUpdate @entity {
-    id: Bytes! # compositeHashId(tx.hash, event.logIndex)
-    amount: BigInt!
-    delegateAmount: BigInt!
-    balance: BigInt!
-    delegateBalance: BigInt!
-    timestamp: BigInt!
-    account: Account!
+  id: Bytes! # compositeHashId(tx.hash, event.logIndex)
+  amount: BigInt!
+  delegateAmount: BigInt!
+  balance: BigInt!
+  delegateBalance: BigInt!
+  timestamp: BigInt!
+  account: Account!
 }
 
 type VaultBalanceUpdate implements BalanceUpdate @entity {
-    id: Bytes! # compositeHashId(tx.hash, event.logIndex)
-    amount: BigInt!
-    delegateAmount: BigInt!
-    balance: BigInt!
-    delegateBalance: BigInt!
-    timestamp: BigInt!
-    vault: Vault!
+  id: Bytes! # compositeHashId(tx.hash, event.logIndex)
+  amount: BigInt!
+  delegateAmount: BigInt!
+  balance: BigInt!
+  delegateBalance: BigInt!
+  timestamp: BigInt!
+  vault: Vault!
 }
 
 type AccountObservation implements Observation @entity {
-    id: Bytes! # compositeHashId(tx.hash, event.logIndex)
-    account: Account!
-    balance: BigInt!
-    delegateBalance: BigInt!
-    cumulativeBalance: BigInt!
-    timestamp: BigInt!
-    isNew: Boolean!
+  id: Bytes! # compositeHashId(tx.hash, event.logIndex)
+  account: Account!
+  balance: BigInt!
+  delegateBalance: BigInt!
+  cumulativeBalance: BigInt!
+  timestamp: BigInt!
+  isNew: Boolean!
 }
 
 type VaultObservation implements Observation @entity {
-    id: Bytes! # compositeHashId(tx.hash, event.logIndex)
-    vault: Vault!
-    balance: BigInt!
-    delegateBalance: BigInt!
-    cumulativeBalance: BigInt!
-    timestamp: BigInt!
-    isNew: Boolean!
+  id: Bytes! # compositeHashId(tx.hash, event.logIndex)
+  vault: Vault!
+  balance: BigInt!
+  delegateBalance: BigInt!
+  cumulativeBalance: BigInt!
+  timestamp: BigInt!
+  isNew: Boolean!
 }
 
 interface BalanceUpdate {
-    amount: BigInt!
-    delegateAmount: BigInt!
-    balance: BigInt!
-    delegateBalance: BigInt!
-    timestamp: BigInt!
-    txHash: String!
+  amount: BigInt!
+  delegateAmount: BigInt!
+  balance: BigInt!
+  delegateBalance: BigInt!
+  timestamp: BigInt!
+  txHash: String!
 }
 
 interface Observation {
-    balance: BigInt!
-    delegateBalance: BigInt!
-    cumulativeBalance: BigInt!
-    timestamp: BigInt!
+  balance: BigInt!
+  delegateBalance: BigInt!
+  cumulativeBalance: BigInt!
+  timestamp: BigInt!
 }
