@@ -1,14 +1,15 @@
-import { Address, BigInt } from '@graphprotocol/graph-ts';
+import { Address, Bytes, BigInt } from '@graphprotocol/graph-ts';
 
 import { Account, AccountBalanceUpdate } from '../../../generated/schema';
-import { loadOrCreateAccount } from './loadOrCreateAccount';
+import { loadOrCreateAccount } from '../account/loadOrCreateAccount';
 
 export const createAccountBalanceUpdate = (
-  id: string,
+  id: Bytes,
   account: Account,
   amount: BigInt,
   delegateAmount: BigInt,
   timestamp: BigInt,
+  txHash: Bytes,
 ): AccountBalanceUpdate => {
   const balanceUpdate = new AccountBalanceUpdate(id);
   balanceUpdate.account = account.id;
@@ -17,17 +18,19 @@ export const createAccountBalanceUpdate = (
   balanceUpdate.balance = account.balance;
   balanceUpdate.delegateBalance = account.delegateBalance;
   balanceUpdate.timestamp = timestamp;
+  balanceUpdate.txHash = txHash;
   balanceUpdate.save();
   return balanceUpdate;
 };
 
 export const updateAccountBalance = (
-  id: string,
+  id: Bytes,
   vaultId: Address,
   userId: Address,
   amount: BigInt,
   delegateAmount: BigInt,
   timestamp: BigInt,
+  txHash: Bytes,
 ): AccountBalanceUpdate => {
   // Update account balance
   const account = loadOrCreateAccount(vaultId, userId);
@@ -36,5 +39,5 @@ export const updateAccountBalance = (
   account.save();
 
   // Create balance update entity
-  return createAccountBalanceUpdate(id, account, amount, delegateAmount, timestamp);
+  return createAccountBalanceUpdate(id, account, amount, delegateAmount, timestamp, txHash);
 };

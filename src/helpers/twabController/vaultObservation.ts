@@ -1,10 +1,10 @@
-import { Address, BigInt } from '@graphprotocol/graph-ts';
+import { Address, Bytes, BigInt } from '@graphprotocol/graph-ts';
 
 import { VaultObservation } from '../../../generated/schema';
-import { loadOrCreateVault } from './loadOrCreateVault';
+import { loadOrCreateVault } from '../vault/loadOrCreateVault';
 
 export const createVaultObservation = (
-  id: string,
+  id: Bytes,
   vaultId: Address,
   balance: BigInt,
   delegateBalance: BigInt,

@@ -1,20 +1,10 @@
 import { Bytes, BigInt, Address } from '@graphprotocol/graph-ts';
 
 import { PrizeClaim } from '../../../generated/schema';
-import { loadOrCreateDraw } from './draw';
-import { loadOrCreateVault } from './vault';
-import { loadOrCreateAccount } from './account';
+import { loadDraw } from '../draw/loadOrCreateDraw';
+import { loadOrCreateVault } from '../vault/loadOrCreateVault';
+import { loadOrCreateAccount } from '../account/loadOrCreateAccount';
 import { generateHashId } from '../common';
-
-// Generate ID for PrizeClaim entity
-export const generateCompositePrizeClaimId = (
-  _vaultId: string,
-  _winnerId: string,
-  _recipientId: string,
-  _drawId: string,
-  _tier: string,
-  _prizeIndex: string,
-): string => generateHashId(_vaultId, _winnerId, _recipientId, _drawId, _tier, _prizeIndex);
 
 export const createPrizeClaim = (
   _vaultId: Address,
@@ -27,35 +17,45 @@ export const createPrizeClaim = (
   _fee: BigInt,
   _feeRecipientId: Bytes,
   _timestamp: BigInt,
+  _txHash: Bytes,
 ): PrizeClaim => {
-  const prizeClaimId = generateCompositePrizeClaimId(
-    _vaultId.toHexString(),
-    _winnerId.toHexString(),
-    _recipientId.toHexString(),
-    _drawId.toString(),
-    _tier.toString(),
-    _prizeIndex.toString(),
-  );
+  const prizeClaimId = generateHashId([
+    _vaultId,
+    _winnerId,
+    _recipientId,
+    Bytes.fromI32(_drawId),
+    Bytes.fromI32(_tier),
+    Bytes.fromI32(_prizeIndex.toI32()),
+  ]);
+  // const prizeClaimId = generateCompositePrizeClaimId(
+  //   _vaultId.toHexString(),
+  //   _winnerId.toHexString(),
+  //   _recipientId.toHexString(),
+  //   _drawId.toString(),
+  //   _tier.toString(),
+  //   _prizeIndex.toString(),
+  // );
 
   // Ensure other entities are initialized
-  loadOrCreateDraw(_drawId);
+  loadDraw(_drawId);
   loadOrCreateVault(_vaultId);
-  loadOrCreateAccount(_winnerId);
-  loadOrCreateAccount(_recipientId);
-  loadOrCreateAccount(_feeRecipientId);
+  loadOrCreateAccount(_vaultId, _winnerId);
+  loadOrCreateAccount(_vaultId, _recipientId);
+  loadOrCreateAccount(_vaultId, _feeRecipientId);
 
   // Initialize PrizeClaim entity
   const prizeClaim = new PrizeClaim(prizeClaimId);
   prizeClaim.vault = _vaultId;
   prizeClaim.winner = _winnerId;
   prizeClaim.recipient = _recipientId;
-  prizeClaim.draw = _drawId.toString();
+  prizeClaim.draw = Bytes.fromI32(_drawId);
   prizeClaim.tier = _tier;
   prizeClaim.prizeIndex = _prizeIndex;
   prizeClaim.payout = _payout;
   prizeClaim.fee = _fee;
   prizeClaim.feeRecipient = _feeRecipientId;
   prizeClaim.timestamp = _timestamp;
+  prizeClaim.txHash = _txHash;
 
   // Save PrizeClaim entity
   prizeClaim.save();

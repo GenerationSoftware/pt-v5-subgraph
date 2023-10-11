@@ -7,7 +7,7 @@
 # this document. This is to save storage and query costs since there will
 # be less data in the ID field compared to if we did not hash the composite
 # ID.
-# - Composite Hash IDs are denoted by `compositeHashId(...fields)`
+# - Composite Hash IDs are denoted by `generateHashId(...fields)`
 #
 #############################################################################
 
@@ -29,7 +29,7 @@ type User @entity {
 }
 
 type Account @entity {
-  id: Bytes! # compositeHashId(Vault.address, User.address)
+  id: Bytes! # generateHashId(Vault.address, User.address)
   vault: Vault!
   user: User!
   delegate: Account # account to whom this account delegates their balances
@@ -47,14 +47,14 @@ type Draw @entity {
   id: Bytes! # Draw.drawId as bytes
   drawId: Int! # numerical draw ID for sorting
   numTiers: Int!
-  nextNumTiers: Int!
+  lastNumTiers: Int!
   prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
   closedAtTimestamp: BigInt!
-  txHash: String!
+  txHash: Bytes!
 }
 
 type PrizeClaim @entity {
-  id: Bytes! # compositeHashId(Vault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
+  id: Bytes! # generateHashId(Vault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
   vault: Vault!
   winner: Account!
   recipient: Bytes! # address (where the prize was sent)
@@ -69,27 +69,29 @@ type PrizeClaim @entity {
 }
 
 type AccountBalanceUpdate implements BalanceUpdate @entity {
-  id: Bytes! # compositeHashId(tx.hash, event.logIndex)
+  id: Bytes! # generateHashId(tx.hash, event.logIndex)
   amount: BigInt!
   delegateAmount: BigInt!
   balance: BigInt!
   delegateBalance: BigInt!
   timestamp: BigInt!
+  txHash: Bytes!
   account: Account!
 }
 
 type VaultBalanceUpdate implements BalanceUpdate @entity {
-  id: Bytes! # compositeHashId(tx.hash, event.logIndex)
+  id: Bytes! # generateHashId(tx.hash, event.logIndex)
   amount: BigInt!
   delegateAmount: BigInt!
   balance: BigInt!
   delegateBalance: BigInt!
   timestamp: BigInt!
+  txHash: Bytes!
   vault: Vault!
 }
 
 type AccountObservation implements Observation @entity {
-  id: Bytes! # compositeHashId(tx.hash, event.logIndex)
+  id: Bytes! # generateHashId(tx.hash, event.logIndex)
   account: Account!
   balance: BigInt!
   delegateBalance: BigInt!
@@ -99,7 +101,7 @@ type AccountObservation implements Observation @entity {
 }
 
 type VaultObservation implements Observation @entity {
-  id: Bytes! # compositeHashId(tx.hash, event.logIndex)
+  id: Bytes! # generateHashId(tx.hash, event.logIndex)
   vault: Vault!
   balance: BigInt!
   delegateBalance: BigInt!
@@ -114,7 +116,7 @@ interface BalanceUpdate {
   balance: BigInt!
   delegateBalance: BigInt!
   timestamp: BigInt!
-  txHash: String!
+  txHash: Bytes!
 }
 
 interface Observation {

@@ -64,7 +64,7 @@ dataSources:
         - event: ClaimedPrize(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
           handler: handleClaimedPrize
         - event: DrawAwarded(indexed uint24,uint256,uint8,uint8,uint104,uint128,uint48)
-          handler: handleDrawClosed
+          handler: handleDrawAwarded
       file: ./src/mappings/prizePool.ts
   {{/prizePool}}
   

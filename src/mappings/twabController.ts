@@ -1,3 +1,5 @@
+import { log } from '@graphprotocol/graph-ts';
+
 import {
   IncreasedBalance,
   DecreasedBalance,
@@ -9,9 +11,9 @@ import {
 } from '../../generated/TwabController/TwabController';
 import { createAccountObservation } from '../helpers/twabController/accountObservation';
 import { updateAccountBalance } from '../helpers/twabController/accountBalanceUpdate';
-import { loadOrCreateAccount } from '../helpers/twabController/loadOrCreateAccount';
 import { createVaultObservation } from '../helpers/twabController/vaultObservation';
 import { updateVaultBalance } from '../helpers/twabController/vaultBalanceUpdate';
+import { loadOrCreateAccount } from '../helpers/account/loadOrCreateAccount';
 import { generateUniqueLogId } from '../helpers/common';
 
 export function handleIncreasedBalance(event: IncreasedBalance): void {
@@ -20,7 +22,15 @@ export function handleIncreasedBalance(event: IncreasedBalance): void {
   const amount = event.params.amount;
   const delegateAmount = event.params.delegateAmount;
   const updateId = generateUniqueLogId(event);
-  updateAccountBalance(updateId, vault, user, amount, delegateAmount, event.block.timestamp);
+  updateAccountBalance(
+    updateId,
+    vault,
+    user,
+    amount,
+    delegateAmount,
+    event.block.timestamp,
+    event.transaction.hash,
+  );
 }
 
 export function handleDecreasedBalance(event: DecreasedBalance): void {
@@ -36,6 +46,7 @@ export function handleDecreasedBalance(event: DecreasedBalance): void {
     amount.neg(),
     delegateAmount.neg(),
     event.block.timestamp,
+    event.transaction.hash,
   );
 }
 
@@ -44,7 +55,14 @@ export function handleIncreasedTotalSupply(event: IncreasedTotalSupply): void {
   const amount = event.params.amount;
   const delegateAmount = event.params.delegateAmount;
   const updateId = generateUniqueLogId(event);
-  updateVaultBalance(updateId, vault, amount, delegateAmount, event.block.timestamp);
+  updateVaultBalance(
+    updateId,
+    vault,
+    amount,
+    delegateAmount,
+    event.block.timestamp,
+    event.transaction.hash,
+  );
 }
 
 export function handleDecreasedTotalSupply(event: DecreasedTotalSupply): void {
@@ -52,7 +70,14 @@ export function handleDecreasedTotalSupply(event: DecreasedTotalSupply): void {
   const amount = event.params.amount;
   const delegateAmount = event.params.delegateAmount;
   const updateId = generateUniqueLogId(event);
-  updateVaultBalance(updateId, vault, amount.neg(), delegateAmount.neg(), event.block.timestamp);
+  updateVaultBalance(
+    updateId,
+    vault,
+    amount.neg(),
+    delegateAmount.neg(),
+    event.block.timestamp,
+    event.transaction.hash,
+  );
 }
 
 export function handleDelegated(event: Delegated): void {

@@ -1,10 +1,10 @@
-import { Address, BigInt } from '@graphprotocol/graph-ts';
+import { Address, Bytes, BigInt } from '@graphprotocol/graph-ts';
 
 import { AccountObservation } from '../../../generated/schema';
-import { loadOrCreateAccount } from './loadOrCreateAccount';
+import { loadOrCreateAccount } from '../account/loadOrCreateAccount';
 
 export const createAccountObservation = (
-  id: string,
+  id: Bytes,
   vaultId: Address,
   userId: Address,
   balance: BigInt,

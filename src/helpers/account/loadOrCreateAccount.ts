@@ -2,13 +2,13 @@ import { Bytes } from '@graphprotocol/graph-ts';
 
 import { Account, User } from '../../../generated/schema';
 import { ZERO, generateHashId } from '../common';
-import { loadOrCreateVault } from './loadOrCreateVault';
+import { loadOrCreateVault } from '../vault/loadOrCreateVault';
 
 export function loadOrCreateAccount(vaultId: Bytes, userId: Bytes): Account {
   loadOrCreateVault(vaultId);
   loadOrCreateUser(userId);
 
-  const compositeId = generateHashId(vaultId.toHexString(), userId.toHexString());
+  const compositeId = generateHashId([vaultId, userId]);
   let account = Account.load(compositeId);
 
   // create case
@@ -30,6 +30,7 @@ function loadOrCreateUser(id: Bytes): User {
   // create case
   if (user == null) {
     user = new User(id);
+    user.address = id;
     user.save();
   }
 
