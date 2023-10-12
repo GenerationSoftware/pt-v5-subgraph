@@ -11,6 +11,7 @@ export const createVaultObservation = (
   cumulativeBalance: BigInt,
   isNew: boolean,
   timestamp: BigInt,
+  txHash: Bytes,
 ): VaultObservation => {
   // Load or create vault
   const vault = loadOrCreateVault(vaultId);
@@ -23,6 +24,7 @@ export const createVaultObservation = (
   vaultObservation.cumulativeBalance = cumulativeBalance;
   vaultObservation.isNew = isNew;
   vaultObservation.timestamp = timestamp;
+  vaultObservation.txHash = txHash;
   vaultObservation.save();
   return vaultObservation;
 };

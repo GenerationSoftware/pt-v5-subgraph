@@ -12,6 +12,7 @@ export const createAccountObservation = (
   cumulativeBalance: BigInt,
   isNew: boolean,
   timestamp: BigInt,
+  txHash: Bytes,
 ): AccountObservation => {
   // Load or create account
   const account = loadOrCreateAccount(vaultId, userId);
@@ -24,6 +25,7 @@ export const createAccountObservation = (
   accountObservation.cumulativeBalance = cumulativeBalance;
   accountObservation.isNew = isNew;
   accountObservation.timestamp = timestamp;
+  accountObservation.txHash = txHash;
   accountObservation.save();
   return accountObservation;
 };

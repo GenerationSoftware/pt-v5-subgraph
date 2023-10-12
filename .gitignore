@@ -3,6 +3,7 @@ node_modules
 
 subgraph.yaml
 
+subgraph.goerli.yaml
 subgraph.optimism.yaml
 subgraph.optimism-goerli.yaml
 

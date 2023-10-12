@@ -1,5 +1,3 @@
-import { log } from '@graphprotocol/graph-ts';
-
 import {
   IncreasedBalance,
   DecreasedBalance,
@@ -109,6 +107,7 @@ export function handleObservationRecorded(event: ObservationRecorded): void {
     observation.cumulativeBalance,
     isNew,
     event.block.timestamp,
+    event.transaction.hash,
   );
 }
 
@@ -127,5 +126,6 @@ export function handleTotalSupplyObservationRecorded(event: TotalSupplyObservati
     observation.cumulativeBalance,
     isNew,
     event.block.timestamp,
+    event.transaction.hash,
   );
 }

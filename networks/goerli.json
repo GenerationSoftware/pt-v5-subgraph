@@ -1,0 +1,7 @@
+{
+  "network": "goerli",
+  "rngAuction": {
+    "address": "0x076Ecca6FD357cB83b038D70DB61805b611ba6C7",
+    "startBlock": "9820000"
+  }
+}

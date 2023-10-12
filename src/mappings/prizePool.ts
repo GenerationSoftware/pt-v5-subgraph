@@ -36,15 +36,25 @@ export function handleClaimedPrize(event: ClaimedPrize): void {
 
 export function handleDrawAwarded(event: DrawAwarded): void {
   const drawId = event.params.drawId;
-  // const winningRandomNumber = event.params.winningRandomNumber;
+  const winningRandomNumber = event.params.winningRandomNumber;
   const numTiers = event.params.numTiers;
   const lastNumTiers = event.params.lastNumTiers;
-  // const reserve = event.params.reserve;
-  // const prizeTokensPerShare = event.params.prizeTokensPerShare;
-  // const drawOpenedAt = event.params.drawOpenedAt;
+  const reserve = event.params.reserve;
+  const prizeTokensPerShare = event.params.prizeTokensPerShare;
+  const drawOpenedAt = event.params.drawOpenedAt;
 
   const timestamp = event.block.timestamp;
   const txHash = event.transaction.hash;
 
-  createDraw(drawId, numTiers, lastNumTiers, timestamp, txHash);
+  createDraw(
+    drawId,
+    winningRandomNumber,
+    numTiers,
+    lastNumTiers,
+    reserve,
+    prizeTokensPerShare,
+    drawOpenedAt,
+    timestamp,
+    txHash,
+  );
 }
