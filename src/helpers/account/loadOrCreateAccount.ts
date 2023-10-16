@@ -1,3 +1,4 @@
+import { log } from '@graphprotocol/graph-ts';
 import { Bytes } from '@graphprotocol/graph-ts';
 
 import { Account, User } from '../../../generated/schema';

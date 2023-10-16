@@ -1,3 +1,4 @@
+import { log } from '@graphprotocol/graph-ts';
 import { Bytes, BigInt, Address } from '@graphprotocol/graph-ts';
 
 import { PrizeClaim } from '../../../generated/schema';
@@ -27,14 +28,6 @@ export const createPrizeClaim = (
     Bytes.fromI32(_tier),
     Bytes.fromI32(_prizeIndex.toI32()),
   ]);
-  // const prizeClaimId = generateCompositePrizeClaimId(
-  //   _vaultId.toHexString(),
-  //   _winnerId.toHexString(),
-  //   _recipientId.toHexString(),
-  //   _drawId.toString(),
-  //   _tier.toString(),
-  //   _prizeIndex.toString(),
-  // );
 
   // Ensure other entities are initialized
   loadDraw(_drawId);

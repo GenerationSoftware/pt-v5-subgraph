@@ -1,3 +1,4 @@
+import { log } from '@graphprotocol/graph-ts';
 import { ClaimedPrize, DrawAwarded } from '../../generated/PrizePool/PrizePool';
 
 import { createPrizeClaim } from '../helpers/prizePool/prizeClaim';

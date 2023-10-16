@@ -38,9 +38,14 @@ type Account @entity {
   balanceUpdates: [AccountBalanceUpdate!]! @derivedFrom(field: "account")
   observations: [AccountObservation!]! @derivedFrom(field: "account")
   delegators: [Account!]! @derivedFrom(field: "delegate") # accounts who delegated to this account
-  prizesWon: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the winner
-  prizesReceived: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the prize recipient
-  fees: [PrizeClaim!]! @derivedFrom(field: "feeRecipient") # prize claim fees earned by this user
+  #
+  # TODO: Figure out why these relational fields don't work with the Account type
+  #       In PrizeClaim queries the winner, feeRecipient and recipient get set to null if
+  #       they are Account and not Bytes
+  #
+  # prizesWon: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the winner
+  # prizesReceived: [PrizeClaim!]! @derivedFrom(field: "recipient") # prize claims where this user is the prize recipient
+  # fees: [PrizeClaim!]! @derivedFrom(field: "feeRecipient") # prize claim fees earned by this user
 }
 
 type Draw @entity {
@@ -60,14 +65,14 @@ type Draw @entity {
 type PrizeClaim @entity {
   id: Bytes! # generateHashId(Vault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
   vault: Vault!
-  winner: Account!
+  winner: Bytes! # address (who won the prize)
   recipient: Bytes! # address (where the prize was sent)
   draw: Draw!
   tier: Int!
   prizeIndex: BigInt!
   payout: BigInt!
   fee: BigInt!
-  feeRecipient: Account! # address (who gets the claim fee)
+  feeRecipient: Bytes! # address (who gets the claim fee)
   timestamp: BigInt!
   txHash: Bytes!
 }
