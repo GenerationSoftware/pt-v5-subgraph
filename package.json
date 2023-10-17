@@ -1,6 +1,15 @@
 {
   "name": "pt-v5-subgraph",
+  "description": "Combined subgraph for PoolTogether v5",
+  "author": {
+    "name": "G9 Software Inc.",
+    "url": "https://github.com/generationsoftware"
+  },
   "license": "MIT",
+  "homepage": "https://github.com/generationsoftware/pt-v5-subgraph",
+  "bugs": {
+    "url": "https://github.com/generationsoftware/pt-v5-subgraph/issues",
+  },
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
