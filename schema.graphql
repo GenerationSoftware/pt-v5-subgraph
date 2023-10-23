@@ -75,6 +75,7 @@ type PrizeClaim @entity {
   feeRecipient: Bytes! # address (who gets the claim fee)
   timestamp: BigInt!
   txHash: Bytes!
+  gasUsed: BigInt!
 }
 
 type AccountBalanceUpdate implements BalanceUpdate @entity {
@@ -147,6 +148,38 @@ type RngAuction @entity {
   rngRequestId: BigInt!
   elapsedTime: BigInt!
   rewardFraction: BigInt!
+  timestamp: BigInt!
+  txHash: Bytes!
+  gasUsed: BigInt!
+}
+
+type LiquidationPair @entity {
+  id: Bytes! # generateHashId(tx.hash, event.logIndex)
+  address: Bytes!
+  tokenIn: Bytes!
+  tokenOut: Bytes!
+  source: Bytes!
+  periodLength: BigInt!
+  firstPeriodStartsAt: BigInt!
+  targetFirstSaleTime: BigInt!
+  decayConstant: BigInt!
+  initialAmountIn: BigInt!
+  initialAmountOut: BigInt!
+  minimumAuctionAmount: BigInt!
+  timestamp: BigInt!
+  txHash: Bytes!
+  gasUsed: BigInt!
+}
+
+type Liquidation @entity {
+  id: Bytes! # generateHashId(tx.hash, event.logIndex)
+  liquidationPair: LiquidationPair!
+  sender: Bytes!
+  receiver: Bytes!
+  amountOut: BigInt!
+  amountInMax: BigInt!
+  amountIn: BigInt!
+  deadline: Int!
   timestamp: BigInt!
   txHash: Bytes!
   gasUsed: BigInt!

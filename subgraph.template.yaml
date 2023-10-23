@@ -113,4 +113,68 @@ dataSources:
           handler: handleClaimedPrize
       file: ./src/mappings/rngRelayAuction.ts
   {{/rngRelayAuction}}
-  
+  {{#liquidationPairFactory}}
+  - kind: ethereum
+    name: LiquidationPairFactory
+    network: {{network}}
+    source:
+      address: "{{liquidationPairFactory.address}}"
+      abi: LiquidationPairFactory
+      startBlock: {{liquidationPairFactory.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LiquidationPair
+      abis:
+        - name: LiquidationPairFactory
+          file: ./abis/LiquidationPairFactory.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,indexed address,address,uint32,uint32,uint32,int256,uint104,uint104,uint256)
+          handler: handlePairCreated
+      file: ./src/mappings/liquidationPairFactory.ts
+  {{/liquidationPairFactory}}
+  {{#liquidationRouter}}
+  - kind: ethereum
+    name: LiquidationRouter
+    network: {{network}}
+    source:
+      address: "{{liquidationRouter.address}}"
+      abi: LiquidationRouter
+      startBlock: {{liquidationRouter.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Liquidation
+      abis:
+        - name: LiquidationRouter
+          file: ./abis/LiquidationRouter.json
+      eventHandlers:
+        - event: SwappedExactAmountOut(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256)
+          handler: handleSwappedExactAmountOut
+      file: ./src/mappings/liquidationRouter.ts
+  {{/liquidationRouter}}
+
+# templates:
+#   - kind: ethereum
+#     name: LiquidationPair
+#     network: {{network}}
+#     source:
+#       abi: LiquidationPair
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       entities:
+#         - LiquidationPair
+#         - Liquidation
+#       abis:
+#         - name: LiquidationPair
+#           file: ./abis/LiquidationPair.json
+#       eventHandlers:
+#         - event: Swapped(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
+#           handler: handleSwapped
+#       file: ./src/mappings/liquidationPair.ts

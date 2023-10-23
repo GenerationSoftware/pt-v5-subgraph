@@ -1,4 +1,3 @@
-import { log } from '@graphprotocol/graph-ts';
 import { ClaimedPrize, DrawAwarded } from '../../generated/PrizePool/PrizePool';
 
 import { createPrizeClaim } from '../helpers/prizePool/prizeClaim';
@@ -20,6 +19,8 @@ export function handleClaimedPrize(event: ClaimedPrize): void {
   const timestamp = event.block.timestamp;
   const txHash = event.transaction.hash;
 
+  const gasUsed = event.receipt!.gasUsed;
+
   createPrizeClaim(
     vault,
     winner,
@@ -32,6 +33,7 @@ export function handleClaimedPrize(event: ClaimedPrize): void {
     feeRecipient,
     timestamp,
     txHash,
+    gasUsed,
   );
 }
 
