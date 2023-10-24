@@ -14,6 +14,7 @@
 type Vault @entity {
   id: Bytes! # Vault.address
   address: Bytes!
+  liquidationPair: LiquidationPair
   balance: BigInt!
   delegateBalance: BigInt!
   balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "vault")
@@ -156,6 +157,8 @@ type RngAuction @entity {
 type LiquidationPair @entity {
   id: Bytes! # address
   liquidations: [Liquidation!]! @derivedFrom(field: "liquidationPair")
+  vault: Vault @derivedFrom(field: "liquidationPair")
+  vaultBooster: VaultBooster @derivedFrom(field: "liquidationPair")
   address: Bytes!
   tokenIn: Bytes!
   tokenOut: Bytes!
@@ -188,13 +191,16 @@ type Liquidation @entity {
 
 type VaultBooster @entity {
   id: Bytes! # VaultBooster.address
+  liquidationPair: LiquidationPair
   address: Bytes!
-  prizePool: PrizePool!
-  vault: Vault!
-  owner: Bytes!
+  prizePool: Bytes
+  # TODO: # prizePool: PrizePool!
+  vault: Vault
+  owner: Bytes
 }
 
-type PrizePool @entity {
-  id: Bytes! # PrizePool.address
-  address: Bytes!
-}
+# TODO:
+# type PrizePool @entity {
+#   id: Bytes! # PrizePool.address
+#   address: Bytes!
+# }

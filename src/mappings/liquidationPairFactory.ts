@@ -1,6 +1,5 @@
 import { PairCreated } from '../../generated/LiquidationPairFactory/LiquidationPairFactory';
 
-import { generateUniqueLogId } from '../helpers/common';
 import { createLiquidationPair } from '../helpers/liquidationPair/createLiquidationPair';
 
 export function handlePairCreated(event: PairCreated): void {

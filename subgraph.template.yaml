@@ -206,3 +206,43 @@ dataSources:
           receipt: true
       file: ./src/mappings/vaultBoostFactory.ts
   {{/vaultBoostFactory}}
+
+templates:
+  - name: Vault
+    kind: ethereum/contract
+    network: {{network}}
+    source:
+      abi: Vault
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/vault.ts
+      entities:
+        - Vault
+      abis:
+        - name: Vault
+          file:  ./abis/Vault.json
+      eventHandlers:
+        - event: LiquidationPairSet(indexed address,indexed address)
+          handler: handleLiquidationPairSet
+  - name: VaultBooster
+    kind: ethereum/contract
+    network: {{network}}
+    source:
+      abi: VaultBooster
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/vaultBooster.ts
+      entities:
+        - VaultBooster
+      abis:
+        - name: VaultBooster
+          file:  ./abis/Vault.json
+      eventHandlers:
+        - event: LiquidationPairSet(indexed address,indexed address)
+          handler: handleLiquidationPairSet
+        
+ 
