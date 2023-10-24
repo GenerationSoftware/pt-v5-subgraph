@@ -10,7 +10,7 @@ export const createLiquidation = (
   amountOut: BigInt,
   amountInMax: BigInt,
   amountIn: BigInt,
-  deadline: i32,
+  deadline: BigInt,
   timestamp: BigInt,
   txHash: Bytes,
   gasUsed: BigInt,

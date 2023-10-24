@@ -154,7 +154,8 @@ type RngAuction @entity {
 }
 
 type LiquidationPair @entity {
-  id: Bytes! # generateHashId(tx.hash, event.logIndex)
+  id: Bytes! # address
+  liquidations: [Liquidation!]! @derivedFrom(field: "liquidationPair")
   address: Bytes!
   tokenIn: Bytes!
   tokenOut: Bytes!
@@ -179,8 +180,21 @@ type Liquidation @entity {
   amountOut: BigInt!
   amountInMax: BigInt!
   amountIn: BigInt!
-  deadline: Int!
+  deadline: BigInt!
   timestamp: BigInt!
   txHash: Bytes!
   gasUsed: BigInt!
+}
+
+type VaultBooster @entity {
+  id: Bytes! # VaultBooster.address
+  address: Bytes!
+  prizePool: PrizePool!
+  vault: Vault!
+  owner: Bytes!
+}
+
+type PrizePool @entity {
+  id: Bytes! # PrizePool.address
+  address: Bytes!
 }

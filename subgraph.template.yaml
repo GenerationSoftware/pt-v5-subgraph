@@ -63,6 +63,7 @@ dataSources:
       eventHandlers:
         - event: ClaimedPrize(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
           handler: handleClaimedPrize
+          receipt: true
         - event: DrawAwarded(indexed uint24,uint256,uint8,uint8,uint104,uint128,uint48)
           handler: handleDrawAwarded
       file: ./src/mappings/prizePool.ts
@@ -133,6 +134,7 @@ dataSources:
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,indexed address,address,uint32,uint32,uint32,int256,uint104,uint104,uint256)
           handler: handlePairCreated
+          receipt: true
       file: ./src/mappings/liquidationPairFactory.ts
   {{/liquidationPairFactory}}
   {{#liquidationRouter}}
@@ -155,26 +157,52 @@ dataSources:
       eventHandlers:
         - event: SwappedExactAmountOut(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256)
           handler: handleSwappedExactAmountOut
+          receipt: true
       file: ./src/mappings/liquidationRouter.ts
   {{/liquidationRouter}}
-
-# templates:
-#   - kind: ethereum
-#     name: LiquidationPair
-#     network: {{network}}
-#     source:
-#       abi: LiquidationPair
-#     mapping:
-#       kind: ethereum/events
-#       apiVersion: 0.0.7
-#       language: wasm/assemblyscript
-#       entities:
-#         - LiquidationPair
-#         - Liquidation
-#       abis:
-#         - name: LiquidationPair
-#           file: ./abis/LiquidationPair.json
-#       eventHandlers:
-#         - event: Swapped(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
-#           handler: handleSwapped
-#       file: ./src/mappings/liquidationPair.ts
+  {{#vaultFactory}}
+  - kind: ethereum
+    name: VaultFactory
+    network: {{network}}
+    source:
+      address: "{{vaultFactory.address}}"
+      abi: VaultFactory
+      startBlock: {{vaultFactory.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Vault
+      abis:
+        - name: VaultFactory
+          file: ./abis/VaultFactory.json
+      eventHandlers:
+        - event: NewFactoryVault(indexed address,indexed address)
+          handler: handleNewFactoryVault
+          receipt: true
+      file: ./src/mappings/vaultFactory.ts
+  {{/vaultFactory}}
+  {{#vaultBoostFactory}}
+  - kind: ethereum
+    name: VaultBoostFactory
+    network: {{network}}
+    source:
+      address: "{{vaultBoostFactory.address}}"
+      abi: VaultBoostFactory
+      startBlock: {{vaultBoostFactory.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Vault
+      abis:
+        - name: VaultBoostFactory
+          file: ./abis/VaultBoostFactory.json
+      eventHandlers:
+        - event: CreatedVaultBooster(indexed address,indexed address,indexed address,address)
+          handler: handleCreatedVaultBooster
+          receipt: true
+      file: ./src/mappings/vaultBoostFactory.ts
+  {{/vaultBoostFactory}}

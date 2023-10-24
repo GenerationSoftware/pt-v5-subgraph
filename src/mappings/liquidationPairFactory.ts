@@ -4,7 +4,7 @@ import { generateUniqueLogId } from '../helpers/common';
 import { createLiquidationPair } from '../helpers/liquidationPair/createLiquidationPair';
 
 export function handlePairCreated(event: PairCreated): void {
-  const id = generateUniqueLogId(event);
+  const id = event.params.pair;
 
   const address = event.params.pair;
   const tokenIn = event.params.tokenIn;

@@ -11,5 +11,17 @@
   "liquidationPairFactory": {
     "address": "0x555bd8fc65e57139c9f405980c7a9526a7de8093",
     "startBlock": "111036000"
+  },
+  "liquidationRouter": {
+    "address": "0xb9fba7b2216167dcdd1a7ae0a564dd43e1b68b95",
+    "startBlock": "111036000"
+  },
+  "vaultFactory": {
+    "address": "0xf65fa202907d6046d1ef33c521889b54bde08081",
+    "startBlock": "111036000"
+  },
+  "vaultBoostFactory": {
+    "address": "0x17b9d77a393f2aa311e5ef08b73f3239b7f66837",
+    "startBlock": "111036000"
   }
 }
