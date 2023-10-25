@@ -3,5 +3,9 @@
   "rngAuction": {
     "address": "0xafcede71e62684de45d423712feeebb83863dfde",
     "startBlock": "9884000"
+  },
+  "rngAuctionRelayerRemoteOwner": {
+    "address": "0xe34def1114d7bb0298636a2026d9cf3d67f19fbd",
+    "startBlock": "9884000"
   }
 }

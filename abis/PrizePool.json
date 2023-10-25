@@ -14,9 +14,9 @@
             "type": "address"
           },
           {
-            "internalType": "uint32",
+            "internalType": "uint48",
             "name": "drawPeriodSeconds",
-            "type": "uint32"
+            "type": "uint48"
           },
           {
             "internalType": "uint48",
@@ -234,17 +234,6 @@
       }
     ],
     "name": "InsufficientRewardsError",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint24",
-        "name": "endDrawId",
-        "type": "uint24"
-      }
-    ],
-    "name": "InvalidDisbursedEndDrawId",
     "type": "error"
   },
   {
@@ -828,30 +817,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint8",
-        "name": "_tier",
-        "type": "uint8"
-      }
-    ],
-    "name": "calculateTierTwabTimestamps",
-    "outputs": [
-      {
-        "internalType": "uint48",
-        "name": "startTimestamp",
-        "type": "uint48"
-      },
-      {
-        "internalType": "uint48",
-        "name": "endTimestamp",
-        "type": "uint48"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "claimCount",
     "outputs": [
@@ -1020,9 +985,9 @@
     "name": "drawPeriodSeconds",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint48",
         "name": "",
-        "type": "uint32"
+        "type": "uint48"
       }
     ],
     "stateMutability": "view",

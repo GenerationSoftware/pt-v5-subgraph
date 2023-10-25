@@ -4,8 +4,8 @@
     "address": "0x499a9f249ec4c8ea190bebbfd96f9a83bf4f6e52",
     "startBlock": "111036000"
   },
-  "prizePool": {
-    "address": "0xe32e5e1c5f0c80bd26def2d0ea5008c107000d6a",
+  "rngRelayAuction": {
+    "address": "0x87d3d9afed1702728b7f280ba5c4b4c55defa557",
     "startBlock": "111036000"
   },
   "liquidationPairFactory": {

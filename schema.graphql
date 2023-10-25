@@ -154,6 +154,29 @@ type RngAuction @entity {
   gasUsed: BigInt!
 }
 
+type RngRelay @entity {
+  id: Bytes! # generateHashId(tx.hash, event.logIndex)
+  sender: Bytes!
+  messageDispatcher: Bytes!
+  remoteOwnerChainId: BigInt!
+  remoteOwner: Bytes!
+  remoteRngAuctionRelayListener: Bytes!
+  rewardRecipient: Bytes!
+  messageId: Bytes!
+  timestamp: BigInt!
+  txHash: Bytes!
+  gasUsed: BigInt!
+}
+
+type RngRelayReward @entity {
+  id: Bytes! # generateHashId(tx.hash, event.logIndex)
+  recipient: Bytes!
+  reward: BigInt!
+  timestamp: BigInt!
+  txHash: Bytes!
+  gasUsed: BigInt!
+}
+
 type LiquidationPair @entity {
   id: Bytes! # address
   liquidations: [Liquidation!]! @derivedFrom(field: "liquidationPair")

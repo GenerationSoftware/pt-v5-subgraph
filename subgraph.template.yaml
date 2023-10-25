@@ -104,16 +104,39 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - PrizeClaim
-        - Draw
+        - RngRelayAuction
       abis:
         - name: RngRelayAuction
           file: ./abis/RngRelayAuction.json
       eventHandlers:
-        - event: ClaimedPrize(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
-          handler: handleClaimedPrize
+        - event: AuctionRewardAllocated(indexed uint32,indexed address,indexed uint32,uint256)
+          handler: handleAuctionRewardAllocated
+          receipt: true
       file: ./src/mappings/rngRelayAuction.ts
   {{/rngRelayAuction}}
+  {{#rngAuctionRelayerRemoteOwner}}
+  - kind: ethereum
+    name: RngAuctionRelayerRemoteOwner
+    network: {{network}}
+    source:
+      address: "{{rngAuctionRelayerRemoteOwner.address}}"
+      abi: RngAuctionRelayerRemoteOwner
+      startBlock: {{rngAuctionRelayerRemoteOwner.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PrizeClaim
+        - Draw
+      abis:
+        - name: RngAuctionRelayerRemoteOwner
+          file: ./abis/RngAuctionRelayerRemoteOwner.json
+      eventHandlers:
+        - event: RelayedToDispatcher(address,indexed uint256,address,address,indexed address,indexed bytes32)
+          handler: handleRelayedToDispatcher
+      file: ./src/mappings/rngAuctionRelayerRemoteOwner.ts
+  {{/rngAuctionRelayerRemoteOwner}}
   {{#liquidationPairFactory}}
   - kind: ethereum
     name: LiquidationPairFactory
