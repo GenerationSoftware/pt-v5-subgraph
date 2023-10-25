@@ -142,6 +142,7 @@ interface Observation {
 
 type RngAuction @entity {
   id: Bytes! # generateHashId(tx.hash, event.logIndex)
+  from: Bytes!
   sender: Bytes!
   recipient: Bytes!
   sequenceId: BigInt!
@@ -156,7 +157,7 @@ type RngAuction @entity {
 
 type RngRelay @entity {
   id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  sender: Bytes!
+  from: Bytes!
   messageDispatcher: Bytes!
   remoteOwnerChainId: BigInt!
   remoteOwner: Bytes!

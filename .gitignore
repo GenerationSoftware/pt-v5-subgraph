@@ -5,6 +5,7 @@ yarn.error
 
 subgraph.yaml
 
+subgraph.ethereum.yaml
 subgraph.goerli.yaml
 subgraph.optimism.yaml
 subgraph.optimism-goerli.yaml

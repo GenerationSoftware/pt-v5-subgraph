@@ -8,6 +8,8 @@ import { generateUniqueLogId } from '../helpers/common';
 export function handleRngAuctionCompleted(event: RngAuctionCompleted): void {
   const id = generateUniqueLogId(event);
 
+  const from = event.transaction.from;
+
   const sender = event.params.sender;
   const recipient = event.params.recipient;
   const sequenceId = event.params.sequenceId;
@@ -24,6 +26,7 @@ export function handleRngAuctionCompleted(event: RngAuctionCompleted): void {
 
   createRngAuction(
     id,
+    from,
     sender,
     recipient,
     sequenceId,

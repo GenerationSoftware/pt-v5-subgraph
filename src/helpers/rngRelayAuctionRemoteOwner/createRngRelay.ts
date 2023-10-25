@@ -4,7 +4,7 @@ import { RngRelay } from '../../../generated/schema';
 
 export const createRngRelay = (
   id: Bytes,
-  sender: Bytes,
+  from: Bytes,
   messageDispatcher: Bytes,
   remoteOwnerChainId: BigInt,
   remoteOwner: Bytes,
@@ -17,7 +17,7 @@ export const createRngRelay = (
 ): RngRelay => {
   const rngRelay = new RngRelay(id);
 
-  rngRelay.sender = sender;
+  rngRelay.from = from;
   rngRelay.messageDispatcher = messageDispatcher;
   rngRelay.remoteOwnerChainId = remoteOwnerChainId;
   rngRelay.remoteOwner = remoteOwner;

@@ -4,6 +4,7 @@ import { RngAuction } from '../../../generated/schema';
 
 export const createRngAuction = (
   id: Bytes,
+  from: Bytes,
   sender: Bytes,
   recipient: Bytes,
   sequenceId: BigInt,
@@ -17,6 +18,7 @@ export const createRngAuction = (
 ): RngAuction => {
   const rngAuction = new RngAuction(id);
 
+  rngAuction.from = from;
   rngAuction.sender = sender;
   rngAuction.recipient = recipient;
   rngAuction.sequenceId = sequenceId;

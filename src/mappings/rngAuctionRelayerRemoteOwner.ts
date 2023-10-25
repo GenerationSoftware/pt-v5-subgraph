@@ -6,7 +6,7 @@ import { generateUniqueLogId } from '../helpers/common';
 export function handleRelayedToDispatcher(event: RelayedToDispatcher): void {
   const id = generateUniqueLogId(event);
 
-  const sender = event.transaction.from;
+  const from = event.transaction.from;
 
   const messageDispatcher = event.params.messageDispatcher;
   const remoteOwnerChainId = event.params.remoteOwnerChainId;
@@ -22,7 +22,7 @@ export function handleRelayedToDispatcher(event: RelayedToDispatcher): void {
 
   createRngRelay(
     id,
-    sender,
+    from,
     messageDispatcher,
     remoteOwnerChainId,
     remoteOwner,
