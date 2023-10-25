@@ -1,0 +1,86 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: RngAuction
+    network: mainnet
+    source:
+      address: "0x539a76507f18505ca696d618f8a684814c867f41"
+      abi: RngAuction
+      startBlock: 18380000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - RngAuction
+      abis:
+        - name: RngAuction
+          file: ./abis/RngAuction.json
+      eventHandlers:
+        - event: RngAuctionCompleted(indexed address,indexed address,indexed uint32,address,uint32,uint64,uint64)
+          handler: handleRngAuctionCompleted
+          receipt: true
+      file: ./src/mappings/rngAuction.ts
+  - kind: ethereum
+    name: RngAuctionRelayerRemoteOwner
+    network: mainnet
+    source:
+      address: "0xec9460c59cca1299b0242d6af426c21223cccd24"
+      abi: RngAuctionRelayerRemoteOwner
+      startBlock: 18380000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PrizeClaim
+        - Draw
+      abis:
+        - name: RngAuctionRelayerRemoteOwner
+          file: ./abis/RngAuctionRelayerRemoteOwner.json
+      eventHandlers:
+        - event: RelayedToDispatcher(address,indexed uint256,address,address,indexed address,indexed bytes32)
+          handler: handleRelayedToDispatcher
+      file: ./src/mappings/rngAuctionRelayerRemoteOwner.ts
+
+templates:
+  - name: Vault
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: Vault
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/vault.ts
+      entities:
+        - Vault
+      abis:
+        - name: Vault
+          file:  ./abis/Vault.json
+      eventHandlers:
+        - event: LiquidationPairSet(indexed address,indexed address)
+          handler: handleLiquidationPairSet
+  - name: VaultBooster
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: VaultBooster
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/vaultBooster.ts
+      entities:
+        - VaultBooster
+      abis:
+        - name: VaultBooster
+          file:  ./abis/Vault.json
+      eventHandlers:
+        - event: LiquidationPairSet(indexed address,indexed address)
+          handler: handleLiquidationPairSet
+        
+ 

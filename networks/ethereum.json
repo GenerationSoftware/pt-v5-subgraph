@@ -1,0 +1,11 @@
+{
+  "network": "mainnet",
+  "rngAuction": {
+    "address": "0x539a76507f18505ca696d618f8a684814c867f41",
+    "startBlock": "18380000"
+  },
+  "rngAuctionRelayerRemoteOwner": {
+    "address": "0xec9460c59cca1299b0242d6af426c21223cccd24",
+    "startBlock": "18380000"
+  }
+}
