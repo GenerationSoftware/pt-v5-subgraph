@@ -6,7 +6,7 @@ import { generateUniqueLogId } from '../helpers/common';
 export function handleRelayedToDispatcher(event: RelayedToDispatcher): void {
   const id = generateUniqueLogId(event);
 
-  const sender = event.block.author;
+  const sender = event.transaction.from;
 
   const messageDispatcher = event.params.messageDispatcher;
   const remoteOwnerChainId = event.params.remoteOwnerChainId;
