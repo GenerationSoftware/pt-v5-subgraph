@@ -17,3 +17,5 @@ build
 
 # Matchstick binaries
 tests/.bin/
+
+.DS_Store

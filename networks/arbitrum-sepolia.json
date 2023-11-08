@@ -1,0 +1,27 @@
+{
+  "network": "arbitrum-sepolia",
+  "twabController": {
+    "address": "0xd57822b8846f36f0e1fc775c8214523db199a4c5",
+    "startBlock": "864000"
+  },
+  "prizePool": {
+    "address": "0x6Fd1dF849DFC4F76F0B15ba0c8D3e99FF84817f1",
+    "startBlock": "864000"
+  },
+  "rngRelayAuction": {
+    "address": "0xdf548822a89b37ed4b182716decfe86895effa25",
+    "startBlock": "864000"
+  },
+  "liquidationPairFactory": {
+    "address": "0xb87e4dc3edc62977bd8d93554a4cbf6c52c9282a",
+    "startBlock": "864000"
+  },
+  "liquidationRouter": {
+    "address": "0xee79841cbcb6bf29989b8977952a58c4417d64a9",
+    "startBlock": "864000"
+  },
+  "vaultFactory": {
+    "address": "0xa4b085e5f024036125ed4d0659fe32388a03c6f8",
+    "startBlock": "864000"
+  }
+}

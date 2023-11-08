@@ -1,0 +1,27 @@
+{
+  "network": "optimism-sepolia",
+  "twabController": {
+    "address": "0x8027117daf575dc0668eb0876dc89e622f4d2733",
+    "startBlock": "3783000"
+  },
+  "prizePool": {
+    "address": "0x46547a849f68178208490Cdd491Df15a5bEeA4B2",
+    "startBlock": "3783000"
+  },
+  "rngRelayAuction": {
+    "address": "0x80788dd1bcc906b25c879f6f04a108c4dcfdb78f",
+    "startBlock": "3783000"
+  },
+  "liquidationPairFactory": {
+    "address": "0xd72e8522824fce34ccdc6e8872008465287304c1",
+    "startBlock": "3783000"
+  },
+  "liquidationRouter": {
+    "address": "0x4f03ff51019f56495422e73287b0e4a9c454d371",
+    "startBlock": "3783000"
+  },
+  "vaultFactory": {
+    "address": "0xe5526e74c554d7f6e07906f3a7c315edebb26af4",
+    "startBlock": "3783000"
+  }
+}

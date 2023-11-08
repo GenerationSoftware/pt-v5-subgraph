@@ -1,0 +1,7 @@
+{
+  "network": "sepolia",
+  "rngAuction": {
+    "address": "0x1a188719711d62423abf1a4de7d8aa9014a39d73",
+    "startBlock": "4647000"
+  }
+}
