@@ -206,6 +206,29 @@ dataSources:
           receipt: true
       file: ./src/mappings/vaultFactory.ts
   {{/vaultFactory}}
+  {{#vaultFactoryV2}}
+  - kind: ethereum
+    name: VaultFactoryV2
+    network: {{network}}
+    source:
+      address: "{{vaultFactoryV2.address}}"
+      abi: VaultFactoryV2
+      startBlock: {{vaultFactoryV2.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Vault
+      abis:
+        - name: VaultFactoryV2
+          file: ./abis/VaultFactoryV2.json
+      eventHandlers:
+        - event: NewFactoryVault(indexed address,indexed address)
+          handler: handleNewFactoryVault
+          receipt: true
+      file: ./src/mappings/vaultFactory.ts
+  {{/vaultFactory}}
   {{#vaultBoostFactory}}
   - kind: ethereum
     name: VaultBoostFactory

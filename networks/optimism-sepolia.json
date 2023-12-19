@@ -23,5 +23,9 @@
   "vaultFactory": {
     "address": "0xe5526e74c554d7f6e07906f3a7c315edebb26af4",
     "startBlock": "3783000"
+  },
+  "vaultFactoryV2": {
+    "address": "0x47266c3447459793903fe79589f43230feaf3666",
+    "startBlock": "5605100"
   }
 }
