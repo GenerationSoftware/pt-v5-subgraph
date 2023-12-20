@@ -228,7 +228,7 @@ dataSources:
           handler: handleNewFactoryVault
           receipt: true
       file: ./src/mappings/vaultFactory.ts
-  {{/vaultFactory}}
+  {{/vaultFactoryV2}}
   {{#vaultBoostFactory}}
   - kind: ethereum
     name: VaultBoostFactory
