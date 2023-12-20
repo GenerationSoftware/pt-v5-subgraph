@@ -24,6 +24,10 @@
     "address": "0xf65fa202907d6046d1ef33c521889b54bde08081",
     "startBlock": "111036000"
   },
+  "vaultFactoryV2": {
+    "address": "0x6b17ee3a95bccd605340454c5919e693ef8eff0e",
+    "startBlock": "113710200"
+  },
   "vaultBoostFactory": {
     "address": "0x17b9d77a393f2aa311e5ef08b73f3239b7f66837",
     "startBlock": "111036000"
