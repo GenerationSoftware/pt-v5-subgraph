@@ -2,14 +2,13 @@ specVersion: 0.0.5
 schema:
   file: ./schema.graphql
 dataSources:
-  {{#twabController}}
   - kind: ethereum
     name: TwabController
-    network: {{network}}
+    network: arbitrum-sepolia
     source:
-      address: "{{twabController.address}}"
+      address: "0xd57822b8846f36f0e1fc775c8214523db199a4c5"
       abi: TwabController
-      startBlock: {{twabController.startBlock}}
+      startBlock: 864000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -41,15 +40,13 @@ dataSources:
         - event: TotalSupplyObservationRecorded(indexed address,uint96,uint96,bool,(uint128,uint96,uint32))
           handler: handleTotalSupplyObservationRecorded
       file: ./src/mappings/twabController.ts
-  {{/twabController}}
-  {{#prizePool}}
   - kind: ethereum
     name: PrizePool
-    network: {{network}}
+    network: arbitrum-sepolia
     source:
-      address: "{{prizePool.address}}"
+      address: "0x6Fd1dF849DFC4F76F0B15ba0c8D3e99FF84817f1"
       abi: PrizePool
-      startBlock: {{prizePool.startBlock}}
+      startBlock: 864000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -67,38 +64,13 @@ dataSources:
         - event: DrawAwarded(indexed uint24,uint256,uint8,uint8,uint104,uint128,uint48)
           handler: handleDrawAwarded
       file: ./src/mappings/prizePool.ts
-  {{/prizePool}}
-  {{#rngAuction}}
-  - kind: ethereum
-    name: RngAuction
-    network: {{network}}
-    source:
-      address: "{{rngAuction.address}}"
-      abi: RngAuction
-      startBlock: {{rngAuction.startBlock}}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - RngAuction
-      abis:
-        - name: RngAuction
-          file: ./abis/RngAuction.json
-      eventHandlers:
-        - event: RngAuctionCompleted(indexed address,indexed address,indexed uint32,address,uint32,uint64,uint64)
-          handler: handleRngAuctionCompleted
-          receipt: true
-      file: ./src/mappings/rngAuction.ts
-  {{/rngAuction}}
-  {{#rngRelayAuction}}
   - kind: ethereum
     name: RngRelayAuction
-    network: {{network}}
+    network: arbitrum-sepolia
     source:
-      address: "{{rngRelayAuction.address}}"
+      address: "0xdf548822a89b37ed4b182716decfe86895effa25"
       abi: RngRelayAuction
-      startBlock: {{rngRelayAuction.startBlock}}
+      startBlock: 864000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -113,38 +85,13 @@ dataSources:
           handler: handleAuctionRewardAllocated
           receipt: true
       file: ./src/mappings/rngRelayAuction.ts
-  {{/rngRelayAuction}}
-  {{#rngAuctionRelayerRemoteOwner}}
-  - kind: ethereum
-    name: RngAuctionRelayerRemoteOwner
-    network: {{network}}
-    source:
-      address: "{{rngAuctionRelayerRemoteOwner.address}}"
-      abi: RngAuctionRelayerRemoteOwner
-      startBlock: {{rngAuctionRelayerRemoteOwner.startBlock}}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - PrizeClaim
-        - Draw
-      abis:
-        - name: RngAuctionRelayerRemoteOwner
-          file: ./abis/RngAuctionRelayerRemoteOwner.json
-      eventHandlers:
-        - event: RelayedToDispatcher(address,indexed uint256,address,address,indexed address,indexed bytes32)
-          handler: handleRelayedToDispatcher
-      file: ./src/mappings/rngAuctionRelayerRemoteOwner.ts
-  {{/rngAuctionRelayerRemoteOwner}}
-  {{#liquidationPairFactory}}
   - kind: ethereum
     name: LiquidationPairFactory
-    network: {{network}}
+    network: arbitrum-sepolia
     source:
-      address: "{{liquidationPairFactory.address}}"
+      address: "0xb87e4dc3edc62977bd8d93554a4cbf6c52c9282a"
       abi: LiquidationPairFactory
-      startBlock: {{liquidationPairFactory.startBlock}}
+      startBlock: 864000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -159,15 +106,13 @@ dataSources:
           handler: handlePairCreated
           receipt: true
       file: ./src/mappings/liquidationPairFactory.ts
-  {{/liquidationPairFactory}}
-  {{#liquidationRouter}}
   - kind: ethereum
     name: LiquidationRouter
-    network: {{network}}
+    network: arbitrum-sepolia
     source:
-      address: "{{liquidationRouter.address}}"
+      address: "0xee79841cbcb6bf29989b8977952a58c4417d64a9"
       abi: LiquidationRouter
-      startBlock: {{liquidationRouter.startBlock}}
+      startBlock: 864000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -182,15 +127,13 @@ dataSources:
           handler: handleSwappedExactAmountOut
           receipt: true
       file: ./src/mappings/liquidationRouter.ts
-  {{/liquidationRouter}}
-  {{#vaultFactory}}
   - kind: ethereum
     name: VaultFactory
-    network: {{network}}
+    network: arbitrum-sepolia
     source:
-      address: "{{vaultFactory.address}}"
+      address: "0xa4b085e5f024036125ed4d0659fe32388a03c6f8"
       abi: VaultFactory
-      startBlock: {{vaultFactory.startBlock}}
+      startBlock: 864000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -205,58 +148,11 @@ dataSources:
           handler: handleNewFactoryVault
           receipt: true
       file: ./src/mappings/vaultFactory.ts
-  {{/vaultFactory}}
-  {{#vaultFactoryV2}}
-  - kind: ethereum
-    name: VaultFactoryV2
-    network: {{network}}
-    source:
-      address: "{{vaultFactoryV2.address}}"
-      abi: VaultFactoryV2
-      startBlock: {{vaultFactoryV2.startBlock}}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Vault
-      abis:
-        - name: VaultFactoryV2
-          file: ./abis/VaultFactoryV2.json
-      eventHandlers:
-        - event: NewFactoryVault(indexed address,indexed address)
-          handler: handleNewFactoryVault
-          receipt: true
-      file: ./src/mappings/vaultFactory.ts
-  {{/vaultFactory}}
-  {{#vaultBoostFactory}}
-  - kind: ethereum
-    name: VaultBoostFactory
-    network: {{network}}
-    source:
-      address: "{{vaultBoostFactory.address}}"
-      abi: VaultBoostFactory
-      startBlock: {{vaultBoostFactory.startBlock}}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Vault
-      abis:
-        - name: VaultBoostFactory
-          file: ./abis/VaultBoostFactory.json
-      eventHandlers:
-        - event: CreatedVaultBooster(indexed address,indexed address,indexed address,address)
-          handler: handleCreatedVaultBooster
-          receipt: true
-      file: ./src/mappings/vaultBoostFactory.ts
-  {{/vaultBoostFactory}}
 
 templates:
   - name: Vault
     kind: ethereum/contract
-    network: {{network}}
+    network: arbitrum-sepolia
     source:
       abi: Vault
     mapping:
@@ -274,7 +170,7 @@ templates:
           handler: handleLiquidationPairSet
   - name: VaultBooster
     kind: ethereum/contract
-    network: {{network}}
+    network: arbitrum-sepolia
     source:
       abi: VaultBooster
     mapping:
