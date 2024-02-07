@@ -1,9 +1,9 @@
 import { LiquidationPairSet } from '../../generated/templates/Vault/Vault';
 
-import { loadOrCreateVault } from '../helpers/vault/loadOrCreateVault';
+import { loadOrCreatePrizeVault } from '../helpers/prizeVault/loadOrCreatePrizeVault';
 
 export function handleLiquidationPairSet(event: LiquidationPairSet): void {
-  const vault = loadOrCreateVault(event.address);
+  const vault = loadOrCreatePrizeVault(event.address);
 
   vault.liquidationPair = event.params.liquidationPair;
   vault.save();

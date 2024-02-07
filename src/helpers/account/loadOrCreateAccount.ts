@@ -1,21 +1,20 @@
-import { log } from '@graphprotocol/graph-ts';
 import { Bytes } from '@graphprotocol/graph-ts';
 
 import { Account, User } from '../../../generated/schema';
 import { ZERO, generateHashId } from '../common';
-import { loadOrCreateVault } from '../vault/loadOrCreateVault';
+import { loadOrCreatePrizeVault } from '../prizeVault/loadOrCreatePrizeVault';
 
-export function loadOrCreateAccount(vaultId: Bytes, userId: Bytes): Account {
-  loadOrCreateVault(vaultId);
+export function loadOrCreateAccount(prizeVaultId: Bytes, userId: Bytes): Account {
+  loadOrCreatePrizeVault(prizeVaultId);
   loadOrCreateUser(userId);
 
-  const compositeId = generateHashId([vaultId, userId]);
+  const compositeId = generateHashId([prizeVaultId, userId]);
   let account = Account.load(compositeId);
 
   // create case
   if (account == null) {
     account = new Account(compositeId);
-    account.vault = vaultId;
+    account.prizeVault = prizeVaultId;
     account.user = userId;
     account.balance = ZERO;
     account.delegateBalance = ZERO;

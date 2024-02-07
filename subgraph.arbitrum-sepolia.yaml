@@ -164,7 +164,7 @@ templates:
         - Vault
       abis:
         - name: Vault
-          file:  ./abis/Vault.json
+          file: ./abis/Vault.json
       eventHandlers:
         - event: LiquidationPairSet(indexed address,indexed address)
           handler: handleLiquidationPairSet
@@ -182,9 +182,7 @@ templates:
         - VaultBooster
       abis:
         - name: VaultBooster
-          file:  ./abis/Vault.json
+          file: ./abis/Vault.json
       eventHandlers:
         - event: LiquidationPairSet(indexed address,indexed address)
           handler: handleLiquidationPairSet
-        
- 

@@ -1,13 +1,13 @@
-import { NewFactoryVault } from '../../generated/VaultFactory/VaultFactory';
-import { Vault as VaultTemplate } from '../../generated/templates';
+import { NewPrizeVault } from '../../generated/PrizeVaultFactory/PrizeVaultFactory';
+import { PrizeVault as PrizeVaultTemplate } from '../../generated/templates';
 
-import { loadOrCreateVault } from '../helpers/vault/loadOrCreateVault';
+import { loadOrCreatePrizeVault } from '../helpers/prizeVault/loadOrCreatePrizeVault';
 
-export function handleNewFactoryVault(event: NewFactoryVault): void {
+export function handleNewPrizeVault(event: NewPrizeVault): void {
   const id = event.params.vault;
 
-  loadOrCreateVault(id);
+  loadOrCreatePrizeVault(id);
 
   // Start listening for events from the dynamically generated contract
-  VaultTemplate.create(id);
+  PrizeVaultTemplate.create(id);
 }

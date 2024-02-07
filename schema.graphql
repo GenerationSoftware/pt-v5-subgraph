@@ -11,16 +11,16 @@
 #
 #############################################################################
 
-type Vault @entity {
-  id: Bytes! # Vault.address
+type PrizeVault @entity {
+  id: Bytes! # PrizeVault.address
   address: Bytes!
   liquidationPair: LiquidationPair
   balance: BigInt!
   delegateBalance: BigInt!
-  balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "vault")
-  observations: [VaultObservation!]! @derivedFrom(field: "vault")
-  accounts: [Account!]! @derivedFrom(field: "vault")
-  prizeClaims: [PrizeClaim!]! @derivedFrom(field: "vault") # prize claims for this vault
+  balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "prizeVault")
+  observations: [VaultObservation!]! @derivedFrom(field: "prizeVault")
+  accounts: [Account!]! @derivedFrom(field: "prizeVault")
+  prizeClaims: [PrizeClaim!]! @derivedFrom(field: "prizeVault") # prize claims for this prizeVault
 }
 
 type User @entity {
@@ -30,8 +30,8 @@ type User @entity {
 }
 
 type Account @entity {
-  id: Bytes! # generateHashId(Vault.address, User.address)
-  vault: Vault!
+  id: Bytes! # generateHashId(PrizeVault.address, User.address)
+  prizeVault: PrizeVault!
   user: User!
   delegate: Account # account to whom this account delegates their balances
   balance: BigInt! # balance in account
@@ -64,8 +64,8 @@ type Draw @entity {
 }
 
 type PrizeClaim @entity {
-  id: Bytes! # generateHashId(Vault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
-  vault: Vault!
+  id: Bytes! # generateHashId(PrizeVault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
+  prizeVault: PrizeVault!
   winner: Bytes! # address (who won the prize)
   recipient: Bytes! # address (where the prize was sent)
   draw: Draw!
@@ -92,7 +92,7 @@ type AccountBalanceUpdate implements BalanceUpdate @entity {
 
 type VaultBalanceUpdate implements BalanceUpdate @entity {
   id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  vault: Vault!
+  prizeVault: PrizeVault!
   amount: BigInt!
   delegateAmount: BigInt!
   balance: BigInt!
@@ -114,7 +114,7 @@ type AccountObservation implements Observation @entity {
 
 type VaultObservation implements Observation @entity {
   id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  vault: Vault!
+  prizeVault: PrizeVault!
   balance: BigInt!
   delegateBalance: BigInt!
   cumulativeBalance: BigInt!
@@ -181,7 +181,7 @@ type RngRelayReward @entity {
 type LiquidationPair @entity {
   id: Bytes! # address
   liquidations: [Liquidation!]! @derivedFrom(field: "liquidationPair")
-  vault: Vault @derivedFrom(field: "liquidationPair")
+  prizeVault: PrizeVault @derivedFrom(field: "liquidationPair")
   vaultBooster: VaultBooster @derivedFrom(field: "liquidationPair")
   address: Bytes!
   tokenIn: Bytes!
@@ -219,7 +219,7 @@ type VaultBooster @entity {
   address: Bytes!
   prizePool: Bytes
   # TODO: # prizePool: PrizePool!
-  vault: Vault
+  prizeVault: PrizeVault
   owner: Bytes
 }
 

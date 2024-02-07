@@ -15,7 +15,7 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Vault
+        - PrizeVault
         - User
         - Account
         - AccountBalanceUpdate
@@ -183,52 +183,29 @@ dataSources:
           receipt: true
       file: ./src/mappings/liquidationRouter.ts
   {{/liquidationRouter}}
-  {{#vaultFactory}}
+  {{#prizeVaultFactory}}
   - kind: ethereum
-    name: VaultFactory
+    name: PrizeVaultFactory
     network: {{network}}
     source:
-      address: "{{vaultFactory.address}}"
-      abi: VaultFactory
-      startBlock: {{vaultFactory.startBlock}}
+      address: "{{prizeVaultFactory.address}}"
+      abi: PrizeVaultFactory
+      startBlock: {{prizeVaultFactory.startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Vault
+        - PrizeVault
       abis:
-        - name: VaultFactory
-          file: ./abis/VaultFactory.json
+        - name: PrizeVaultFactory
+          file: ./abis/PrizeVaultFactory.json
       eventHandlers:
-        - event: NewFactoryVault(indexed address,indexed address)
-          handler: handleNewFactoryVault
+        - event: NewPrizeVault(indexed address,indexed address,indexed address,bytes,bytes)
+          handler: handleNewPrizeVault
           receipt: true
-      file: ./src/mappings/vaultFactory.ts
-  {{/vaultFactory}}
-  {{#vaultFactoryV2}}
-  - kind: ethereum
-    name: VaultFactoryV2
-    network: {{network}}
-    source:
-      address: "{{vaultFactoryV2.address}}"
-      abi: VaultFactoryV2
-      startBlock: {{vaultFactoryV2.startBlock}}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Vault
-      abis:
-        - name: VaultFactoryV2
-          file: ./abis/VaultFactoryV2.json
-      eventHandlers:
-        - event: NewFactoryVault(indexed address,indexed address)
-          handler: handleNewFactoryVault
-          receipt: true
-      file: ./src/mappings/vaultFactory.ts
-  {{/vaultFactoryV2}}
+      file: ./src/mappings/prizeVaultFactory.ts
+  {{/prizeVaultFactory}}
   {{#vaultBoostFactory}}
   - kind: ethereum
     name: VaultBoostFactory
@@ -254,21 +231,21 @@ dataSources:
   {{/vaultBoostFactory}}
 
 templates:
-  - name: Vault
+  - name: PrizeVault
     kind: ethereum/contract
     network: {{network}}
     source:
-      abi: Vault
+      abi: PrizeVault
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/mappings/vault.ts
+      file: ./src/mappings/prizeVault.ts
       entities:
-        - Vault
+        - PrizeVault
       abis:
-        - name: Vault
-          file:  ./abis/Vault.json
+        - name: PrizeVault
+          file:  ./abis/PrizeVault.json
       eventHandlers:
         - event: LiquidationPairSet(indexed address,indexed address)
           handler: handleLiquidationPairSet
@@ -281,12 +258,12 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/mappings/vaultBooster.ts
+      file: ./src/mappings/prizeVaultBooster.ts
       entities:
         - VaultBooster
       abis:
         - name: VaultBooster
-          file:  ./abis/Vault.json
+          file:  ./abis/VaultBooster.json
       eventHandlers:
         - event: LiquidationPairSet(indexed address,indexed address)
           handler: handleLiquidationPairSet

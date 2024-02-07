@@ -2,12 +2,12 @@ import { Bytes, BigInt, Address } from '@graphprotocol/graph-ts';
 
 import { PrizeClaim } from '../../../generated/schema';
 import { loadDraw } from '../draw/loadOrCreateDraw';
-import { loadOrCreateVault } from '../vault/loadOrCreateVault';
+import { loadOrCreatePrizeVault } from '../prizeVault/loadOrCreatePrizeVault';
 import { loadOrCreateAccount } from '../account/loadOrCreateAccount';
 import { generateHashId } from '../common';
 
 export const createPrizeClaim = (
-  vaultId: Address,
+  prizeVaultId: Address,
   winnerId: Address,
   recipientId: Address,
   drawId: i32,
@@ -21,7 +21,7 @@ export const createPrizeClaim = (
   gasUsed: BigInt,
 ): PrizeClaim => {
   const prizeClaimId = generateHashId([
-    vaultId,
+    prizeVaultId,
     winnerId,
     recipientId,
     Bytes.fromI32(drawId),
@@ -31,14 +31,14 @@ export const createPrizeClaim = (
 
   // Ensure other entities are initialized
   loadDraw(drawId);
-  loadOrCreateVault(vaultId);
-  loadOrCreateAccount(vaultId, winnerId);
-  loadOrCreateAccount(vaultId, recipientId);
-  loadOrCreateAccount(vaultId, claimRewardRecipientId);
+  loadOrCreatePrizeVault(prizeVaultId);
+  loadOrCreateAccount(prizeVaultId, winnerId);
+  loadOrCreateAccount(prizeVaultId, recipientId);
+  loadOrCreateAccount(prizeVaultId, claimRewardRecipientId);
 
   // Initialize PrizeClaim entity
   const prizeClaim = new PrizeClaim(prizeClaimId);
-  prizeClaim.vault = vaultId;
+  prizeClaim.prizeVault = prizeVaultId;
   prizeClaim.winner = winnerId;
   prizeClaim.recipient = recipientId;
   prizeClaim.draw = Bytes.fromI32(drawId);

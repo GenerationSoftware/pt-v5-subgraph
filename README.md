@@ -2,7 +2,7 @@
 
 ### PoolTogether Hyperstructure Subgraph
 
-PrizePool, TwabController, RngRelayAuction, LiquidationPairFactory, LiquidationRouter, VaultFactory and VaultBoostFactory data typically lives on the L2 (Optimism, Arbitrum, Op Sepolia), and a subgraph using this code is deployed for each chain.
+PrizePool, TwabController, RngRelayAuction, LiquidationPairFactory, LiquidationRouter, PrizeVaultFactory and VaultBoostFactory data typically lives on the L2 (Optimism, Arbitrum, Op Sepolia), and a subgraph using this code is deployed for each chain.
 
 RngAuction, RngAuctionRelayerRemoteOwnerArbitrum, and RngAuctionRelayerRemoteOwnerOptimism lives on L1s (Ethereum Mainnet, Sepolia, etc.), and this same subgraph code is deployed for each L1 chain as well.
 
