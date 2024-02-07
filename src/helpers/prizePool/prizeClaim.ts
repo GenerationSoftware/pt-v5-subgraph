@@ -14,8 +14,8 @@ export const createPrizeClaim = (
   tier: i32,
   prizeIndex: BigInt,
   payout: BigInt,
-  fee: BigInt,
-  feeRecipientId: Bytes,
+  claimReward: BigInt,
+  claimRewardRecipientId: Bytes,
   timestamp: BigInt,
   txHash: Bytes,
   gasUsed: BigInt,
@@ -34,7 +34,7 @@ export const createPrizeClaim = (
   loadOrCreateVault(vaultId);
   loadOrCreateAccount(vaultId, winnerId);
   loadOrCreateAccount(vaultId, recipientId);
-  loadOrCreateAccount(vaultId, feeRecipientId);
+  loadOrCreateAccount(vaultId, claimRewardRecipientId);
 
   // Initialize PrizeClaim entity
   const prizeClaim = new PrizeClaim(prizeClaimId);
@@ -45,8 +45,8 @@ export const createPrizeClaim = (
   prizeClaim.tier = tier;
   prizeClaim.prizeIndex = prizeIndex;
   prizeClaim.payout = payout;
-  prizeClaim.fee = fee;
-  prizeClaim.feeRecipient = feeRecipientId;
+  prizeClaim.claimReward = claimReward;
+  prizeClaim.claimRewardRecipient = claimRewardRecipientId;
   prizeClaim.timestamp = timestamp;
   prizeClaim.txHash = txHash;
   prizeClaim.gasUsed = gasUsed;

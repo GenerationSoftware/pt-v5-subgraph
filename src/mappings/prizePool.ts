@@ -13,8 +13,8 @@ export function handleClaimedPrize(event: ClaimedPrize): void {
   const prizeIndex = event.params.prizeIndex;
 
   const payout = event.params.payout;
-  const fee = event.params.fee;
-  const feeRecipient = event.params.feeRecipient;
+  const claimReward = event.params.claimReward;
+  const claimRewardRecipient = event.params.claimRewardRecipient;
 
   const timestamp = event.block.timestamp;
   const txHash = event.transaction.hash;
@@ -29,8 +29,8 @@ export function handleClaimedPrize(event: ClaimedPrize): void {
     tier,
     prizeIndex,
     payout,
-    fee,
-    feeRecipient,
+    claimReward,
+    claimRewardRecipient,
     timestamp,
     txHash,
     gasUsed,
