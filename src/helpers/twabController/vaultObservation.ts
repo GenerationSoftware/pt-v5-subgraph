@@ -1,7 +1,7 @@
 import { Address, Bytes, BigInt } from '@graphprotocol/graph-ts';
 
 import { VaultObservation } from '../../../generated/schema';
-import { loadOrCreateVault } from '../vault/loadOrCreateVault';
+import { loadOrCreatePrizeVault } from '../prizeVault/loadOrCreatePrizeVault';
 
 export const createVaultObservation = (
   id: Bytes,
@@ -14,11 +14,11 @@ export const createVaultObservation = (
   txHash: Bytes,
 ): VaultObservation => {
   // Load or create vault
-  const vault = loadOrCreateVault(vaultId);
+  const vault = loadOrCreatePrizeVault(vaultId);
 
   // Create vault observation entity
   const vaultObservation = new VaultObservation(id);
-  vaultObservation.vault = vault.id;
+  vaultObservation.prizeVault = vault.id;
   vaultObservation.balance = balance;
   vaultObservation.delegateBalance = delegateBalance;
   vaultObservation.cumulativeBalance = cumulativeBalance;

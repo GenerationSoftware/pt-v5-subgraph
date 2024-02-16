@@ -6,15 +6,15 @@ dataSources:
     name: TwabController
     network: optimism-sepolia
     source:
-      address: "0x8027117daf575dc0668eb0876dc89e622f4d2733"
+      address: "0x00871aaf9a3e0ca7bb3b119f9e8e5753d382b74e"
       abi: TwabController
-      startBlock: 3783000
+      startBlock: 8115000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Vault
+        - PrizeVault
         - User
         - Account
         - AccountBalanceUpdate
@@ -44,9 +44,9 @@ dataSources:
     name: PrizePool
     network: optimism-sepolia
     source:
-      address: "0x46547a849f68178208490Cdd491Df15a5bEeA4B2"
+      address: "0xbf4424d8c9d738d1b768cd8f2d3fa8866c739332"
       abi: PrizePool
-      startBlock: 3783000
+      startBlock: 8115000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -68,9 +68,9 @@ dataSources:
     name: RngRelayAuction
     network: optimism-sepolia
     source:
-      address: "0x80788dd1bcc906b25c879f6f04a108c4dcfdb78f"
+      address: "0x98f2a90308ce5fb2650e9e863b3d296e3f0e6635"
       abi: RngRelayAuction
-      startBlock: 3783000
+      startBlock: 8115000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -89,9 +89,9 @@ dataSources:
     name: LiquidationPairFactory
     network: optimism-sepolia
     source:
-      address: "0xd72e8522824fce34ccdc6e8872008465287304c1"
+      address: "0xe53b815b56f552d371d66b7ed1098b188c5a086e"
       abi: LiquidationPairFactory
-      startBlock: 3783000
+      startBlock: 8115000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -110,9 +110,9 @@ dataSources:
     name: LiquidationRouter
     network: optimism-sepolia
     source:
-      address: "0x4f03ff51019f56495422e73287b0e4a9c454d371"
+      address: "0x4557dfd65520419fad83a488cf024ef15db7be32"
       abi: LiquidationRouter
-      startBlock: 3783000
+      startBlock: 8115000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -128,64 +128,43 @@ dataSources:
           receipt: true
       file: ./src/mappings/liquidationRouter.ts
   - kind: ethereum
-    name: VaultFactory
+    name: PrizeVaultFactory
     network: optimism-sepolia
     source:
-      address: "0xe5526e74c554d7f6e07906f3a7c315edebb26af4"
-      abi: VaultFactory
-      startBlock: 3783000
+      address: "0x43f6d1e62a8a02816a79b6be7fc2b94b36d9d43f"
+      abi: PrizeVaultFactory
+      startBlock: 8115000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Vault
+        - PrizeVault
       abis:
-        - name: VaultFactory
-          file: ./abis/VaultFactory.json
+        - name: PrizeVaultFactory
+          file: ./abis/PrizeVaultFactory.json
       eventHandlers:
-        - event: NewFactoryVault(indexed address,indexed address)
-          handler: handleNewFactoryVault
+        - event: NewPrizeVault(indexed address,indexed address,indexed address,string,string)
+          handler: handleNewPrizeVault
           receipt: true
-      file: ./src/mappings/vaultFactory.ts
-  - kind: ethereum
-    name: VaultFactoryV2
-    network: optimism-sepolia
-    source:
-      address: "0x47266c3447459793903Fe79589f43230fEAF3666"
-      abi: VaultFactoryV2
-      startBlock: 5605000
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Vault
-      abis:
-        - name: VaultFactoryV2
-          file: ./abis/VaultFactoryV2.json
-      eventHandlers:
-        - event: NewFactoryVault(indexed address,indexed address)
-          handler: handleNewFactoryVault
-          receipt: true
-      file: ./src/mappings/vaultFactory.ts
+      file: ./src/mappings/prizeVaultFactory.ts
 
 templates:
-  - name: Vault
+  - name: PrizeVault
     kind: ethereum/contract
     network: optimism-sepolia
     source:
-      abi: Vault
+      abi: PrizeVault
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/mappings/vault.ts
+      file: ./src/mappings/prizeVault.ts
       entities:
-        - Vault
+        - PrizeVault
       abis:
-        - name: Vault
-          file:  ./abis/Vault.json
+        - name: PrizeVault
+          file:  ./abis/PrizeVault.json
       eventHandlers:
         - event: LiquidationPairSet(indexed address,indexed address)
           handler: handleLiquidationPairSet
@@ -203,7 +182,7 @@ templates:
         - VaultBooster
       abis:
         - name: VaultBooster
-          file:  ./abis/Vault.json
+          file:  ./abis/VaultBooster.json
       eventHandlers:
         - event: LiquidationPairSet(indexed address,indexed address)
           handler: handleLiquidationPairSet

@@ -1,4 +1,4 @@
-import { LiquidationPairSet } from '../../generated/templates/Vault/Vault';
+import { LiquidationPairSet } from '../../generated/templates/PrizeVault/PrizeVault';
 
 import { loadOrCreatePrizeVault } from '../helpers/prizeVault/loadOrCreatePrizeVault';
 

@@ -1,1127 +1,1159 @@
 [
   {
+    "type": "constructor",
     "inputs": [
       {
-        "internalType": "uint32",
         "name": "_periodLength",
-        "type": "uint32"
+        "type": "uint32",
+        "internalType": "uint32"
       },
       {
-        "internalType": "uint32",
         "name": "_periodOffset",
-        "type": "uint32"
+        "type": "uint32",
+        "internalType": "uint32"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    "stateMutability": "nonpayable"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint96",
-        "name": "balance",
-        "type": "uint96"
-      },
-      {
-        "internalType": "uint96",
-        "name": "amount",
-        "type": "uint96"
-      },
-      {
-        "internalType": "string",
-        "name": "message",
-        "type": "string"
-      }
-    ],
-    "name": "BalanceLTAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "CannotTransferToSponsorshipAddress",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint96",
-        "name": "delegateBalance",
-        "type": "uint96"
-      },
-      {
-        "internalType": "uint96",
-        "name": "delegateAmount",
-        "type": "uint96"
-      },
-      {
-        "internalType": "string",
-        "name": "message",
-        "type": "string"
-      }
-    ],
-    "name": "DelegateBalanceLTAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "PeriodOffsetRelativeTimestamp",
-        "name": "requestedTimestamp",
-        "type": "uint32"
-      },
-      {
-        "internalType": "PeriodOffsetRelativeTimestamp",
-        "name": "oldestTimestamp",
-        "type": "uint32"
-      }
-    ],
-    "name": "InsufficientHistory",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "start",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "end",
-        "type": "uint256"
-      }
-    ],
-    "name": "InvalidTimeRange",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "PeriodLengthTooShort",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint32",
-        "name": "periodOffset",
-        "type": "uint32"
-      }
-    ],
-    "name": "PeriodOffsetInFuture",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "delegate",
-        "type": "address"
-      }
-    ],
-    "name": "SameDelegateAlreadySet",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "currentOverwritePeriodStartedAt",
-        "type": "uint256"
-      }
-    ],
-    "name": "TimestampNotFinalized",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "TransferToZeroAddress",
-    "type": "error"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "amount",
-        "type": "uint96"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "delegateAmount",
-        "type": "uint96"
-      }
-    ],
-    "name": "DecreasedBalance",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "amount",
-        "type": "uint96"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "delegateAmount",
-        "type": "uint96"
-      }
-    ],
-    "name": "DecreasedTotalSupply",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "delegator",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "delegate",
-        "type": "address"
-      }
-    ],
-    "name": "Delegated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "amount",
-        "type": "uint96"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "delegateAmount",
-        "type": "uint96"
-      }
-    ],
-    "name": "IncreasedBalance",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "amount",
-        "type": "uint96"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "delegateAmount",
-        "type": "uint96"
-      }
-    ],
-    "name": "IncreasedTotalSupply",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "balance",
-        "type": "uint96"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "delegateBalance",
-        "type": "uint96"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "isNew",
-        "type": "bool"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "cumulativeBalance",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
-            "name": "timestamp",
-            "type": "uint32"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct ObservationLib.Observation",
-        "name": "observation",
-        "type": "tuple"
-      }
-    ],
-    "name": "ObservationRecorded",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "balance",
-        "type": "uint96"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint96",
-        "name": "delegateBalance",
-        "type": "uint96"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "isNew",
-        "type": "bool"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "cumulativeBalance",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
-            "name": "timestamp",
-            "type": "uint32"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct ObservationLib.Observation",
-        "name": "observation",
-        "type": "tuple"
-      }
-    ],
-    "name": "TotalSupplyObservationRecorded",
-    "type": "event"
-  },
-  {
-    "inputs": [],
+    "type": "function",
     "name": "PERIOD_LENGTH",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "uint32",
         "name": "",
-        "type": "uint32"
+        "type": "uint32",
+        "internalType": "uint32"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "PERIOD_OFFSET",
-    "outputs": [
-      {
-        "internalType": "uint32",
-        "name": "",
-        "type": "uint32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      }
-    ],
-    "name": "balanceOf",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_from",
-        "type": "address"
-      },
-      {
-        "internalType": "uint96",
-        "name": "_amount",
-        "type": "uint96"
-      }
-    ],
-    "name": "burn",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32",
+        "internalType": "uint32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "balanceOf",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "burn",
+    "inputs": [
+      {
+        "name": "_from",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_amount",
+        "type": "uint96",
+        "internalType": "uint96"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "currentOverwritePeriodStartedAt",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "uint256",
         "name": "",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_vault",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_to",
-        "type": "address"
-      }
-    ],
+    "type": "function",
     "name": "delegate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
+        "name": "_vault",
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
+        "name": "_to",
+        "type": "address",
+        "internalType": "address"
       }
     ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "delegateBalanceOf",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
         "name": "vault",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "internalType": "address",
         "name": "user",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       }
     ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "delegateOf",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
         "name": "vault",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "internalType": "address",
         "name": "user",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       }
     ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "getAccount",
-    "outputs": [
-      {
-        "components": [
-          {
-            "components": [
-              {
-                "internalType": "uint96",
-                "name": "balance",
-                "type": "uint96"
-              },
-              {
-                "internalType": "uint96",
-                "name": "delegateBalance",
-                "type": "uint96"
-              },
-              {
-                "internalType": "uint16",
-                "name": "nextObservationIndex",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "cardinality",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct TwabLib.AccountDetails",
-            "name": "details",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint128",
-                "name": "cumulativeBalance",
-                "type": "uint128"
-              },
-              {
-                "internalType": "uint96",
-                "name": "balance",
-                "type": "uint96"
-              },
-              {
-                "internalType": "uint32",
-                "name": "timestamp",
-                "type": "uint32"
-              }
-            ],
-            "internalType": "struct ObservationLib.Observation[17520]",
-            "name": "observations",
-            "type": "tuple[17520]"
-          }
-        ],
-        "internalType": "struct TwabLib.Account",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
         "name": "vault",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "internalType": "address",
         "name": "user",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "periodEndOnOrAfterTime",
-        "type": "uint256"
+        "type": "address",
+        "internalType": "address"
       }
     ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct TwabLib.Account",
+        "components": [
+          {
+            "name": "details",
+            "type": "tuple",
+            "internalType": "struct TwabLib.AccountDetails",
+            "components": [
+              {
+                "name": "balance",
+                "type": "uint96",
+                "internalType": "uint96"
+              },
+              {
+                "name": "delegateBalance",
+                "type": "uint96",
+                "internalType": "uint96"
+              },
+              {
+                "name": "nextObservationIndex",
+                "type": "uint16",
+                "internalType": "uint16"
+              },
+              {
+                "name": "cardinality",
+                "type": "uint16",
+                "internalType": "uint16"
+              }
+            ]
+          },
+          {
+            "name": "observations",
+            "type": "tuple[17520]",
+            "internalType": "struct ObservationLib.Observation[17520]",
+            "components": [
+              {
+                "name": "cumulativeBalance",
+                "type": "uint128",
+                "internalType": "uint128"
+              },
+              {
+                "name": "balance",
+                "type": "uint96",
+                "internalType": "uint96"
+              },
+              {
+                "name": "timestamp",
+                "type": "uint32",
+                "internalType": "uint32"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "getBalanceAt",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
         "name": "vault",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "internalType": "address",
         "name": "user",
-        "type": "address"
-      }
-    ],
-    "name": "getNewestObservation",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "cumulativeBalance",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
-            "name": "timestamp",
-            "type": "uint32"
-          }
-        ],
-        "internalType": "struct ObservationLib.Observation",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      }
-    ],
-    "name": "getNewestTotalSupplyObservation",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "cumulativeBalance",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
-            "name": "timestamp",
-            "type": "uint32"
-          }
-        ],
-        "internalType": "struct ObservationLib.Observation",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      }
-    ],
-    "name": "getOldestObservation",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "cumulativeBalance",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
-            "name": "timestamp",
-            "type": "uint32"
-          }
-        ],
-        "internalType": "struct ObservationLib.Observation",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      }
-    ],
-    "name": "getOldestTotalSupplyObservation",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "cumulativeBalance",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint96",
-            "name": "balance",
-            "type": "uint96"
-          },
-          {
-            "internalType": "uint32",
-            "name": "timestamp",
-            "type": "uint32"
-          }
-        ],
-        "internalType": "struct ObservationLib.Observation",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "time",
-        "type": "uint256"
-      }
-    ],
-    "name": "getTimestampPeriod",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      }
-    ],
-    "name": "getTotalSupplyAccount",
-    "outputs": [
-      {
-        "components": [
-          {
-            "components": [
-              {
-                "internalType": "uint96",
-                "name": "balance",
-                "type": "uint96"
-              },
-              {
-                "internalType": "uint96",
-                "name": "delegateBalance",
-                "type": "uint96"
-              },
-              {
-                "internalType": "uint16",
-                "name": "nextObservationIndex",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "cardinality",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct TwabLib.AccountDetails",
-            "name": "details",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint128",
-                "name": "cumulativeBalance",
-                "type": "uint128"
-              },
-              {
-                "internalType": "uint96",
-                "name": "balance",
-                "type": "uint96"
-              },
-              {
-                "internalType": "uint32",
-                "name": "timestamp",
-                "type": "uint32"
-              }
-            ],
-            "internalType": "struct ObservationLib.Observation[17520]",
-            "name": "observations",
-            "type": "tuple[17520]"
-          }
-        ],
-        "internalType": "struct TwabLib.Account",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
         "name": "periodEndOnOrAfterTime",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
-    "name": "getTotalSupplyAt",
     "outputs": [
       {
-        "internalType": "uint256",
         "name": "",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
+    "type": "function",
+    "name": "getNewestObservation",
     "inputs": [
       {
-        "internalType": "address",
         "name": "vault",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "startTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "endTime",
-        "type": "uint256"
-      }
-    ],
-    "name": "getTotalSupplyTwabBetween",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "user",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "startTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "endTime",
-        "type": "uint256"
+        "type": "address",
+        "internalType": "address"
       }
     ],
-    "name": "getTwabBetween",
     "outputs": [
       {
-        "internalType": "uint256",
         "name": "",
-        "type": "uint256"
+        "type": "uint16",
+        "internalType": "uint16"
+      },
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ObservationLib.Observation",
+        "components": [
+          {
+            "name": "cumulativeBalance",
+            "type": "uint128",
+            "internalType": "uint128"
+          },
+          {
+            "name": "balance",
+            "type": "uint96",
+            "internalType": "uint96"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
+    "type": "function",
+    "name": "getNewestTotalSupplyObservation",
     "inputs": [
       {
-        "internalType": "uint256",
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint16",
+        "internalType": "uint16"
+      },
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ObservationLib.Observation",
+        "components": [
+          {
+            "name": "cumulativeBalance",
+            "type": "uint128",
+            "internalType": "uint128"
+          },
+          {
+            "name": "balance",
+            "type": "uint96",
+            "internalType": "uint96"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getOldestObservation",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint16",
+        "internalType": "uint16"
+      },
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ObservationLib.Observation",
+        "components": [
+          {
+            "name": "cumulativeBalance",
+            "type": "uint128",
+            "internalType": "uint128"
+          },
+          {
+            "name": "balance",
+            "type": "uint96",
+            "internalType": "uint96"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getOldestTotalSupplyObservation",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint16",
+        "internalType": "uint16"
+      },
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ObservationLib.Observation",
+        "components": [
+          {
+            "name": "cumulativeBalance",
+            "type": "uint128",
+            "internalType": "uint128"
+          },
+          {
+            "name": "balance",
+            "type": "uint96",
+            "internalType": "uint96"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getTimestampPeriod",
+    "inputs": [
+      {
         "name": "time",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getTotalSupplyAccount",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct TwabLib.Account",
+        "components": [
+          {
+            "name": "details",
+            "type": "tuple",
+            "internalType": "struct TwabLib.AccountDetails",
+            "components": [
+              {
+                "name": "balance",
+                "type": "uint96",
+                "internalType": "uint96"
+              },
+              {
+                "name": "delegateBalance",
+                "type": "uint96",
+                "internalType": "uint96"
+              },
+              {
+                "name": "nextObservationIndex",
+                "type": "uint16",
+                "internalType": "uint16"
+              },
+              {
+                "name": "cardinality",
+                "type": "uint16",
+                "internalType": "uint16"
+              }
+            ]
+          },
+          {
+            "name": "observations",
+            "type": "tuple[17520]",
+            "internalType": "struct ObservationLib.Observation[17520]",
+            "components": [
+              {
+                "name": "cumulativeBalance",
+                "type": "uint128",
+                "internalType": "uint128"
+              },
+              {
+                "name": "balance",
+                "type": "uint96",
+                "internalType": "uint96"
+              },
+              {
+                "name": "timestamp",
+                "type": "uint32",
+                "internalType": "uint32"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getTotalSupplyAt",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "periodEndOnOrAfterTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getTotalSupplyTwabBetween",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "startTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "endTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getTwabBetween",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "startTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "endTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "hasFinalized",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_to",
-        "type": "address"
-      },
-      {
-        "internalType": "uint96",
-        "name": "_amount",
-        "type": "uint96"
+        "name": "time",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "isShutdownAt",
+    "inputs": [
+      {
+        "name": "timestamp",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "lastObservationAt",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "mint",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_timestamp",
-        "type": "uint256"
-      }
-    ],
-    "name": "periodEndOnOrAfter",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_from",
-        "type": "address"
-      }
-    ],
-    "name": "sponsor",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      }
-    ],
-    "name": "totalSupply",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      }
-    ],
-    "name": "totalSupplyDelegateBalance",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_from",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "_to",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "internalType": "uint96",
         "name": "_amount",
-        "type": "uint96"
+        "type": "uint96",
+        "internalType": "uint96"
       }
     ],
-    "name": "transfer",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "periodEndOnOrAfter",
+    "inputs": [
+      {
+        "name": "_timestamp",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "sponsor",
+    "inputs": [
+      {
+        "name": "_from",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "totalSupply",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "totalSupplyDelegateBalance",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "transfer",
+    "inputs": [
+      {
+        "name": "_from",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_to",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_amount",
+        "type": "uint96",
+        "internalType": "uint96"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "DecreasedBalance",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "user",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      },
+      {
+        "name": "delegateAmount",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "DecreasedTotalSupply",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      },
+      {
+        "name": "delegateAmount",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Delegated",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "delegator",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "delegate",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "IncreasedBalance",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "user",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      },
+      {
+        "name": "delegateAmount",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "IncreasedTotalSupply",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      },
+      {
+        "name": "delegateAmount",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ObservationRecorded",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "user",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "balance",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      },
+      {
+        "name": "delegateBalance",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      },
+      {
+        "name": "isNew",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
+      },
+      {
+        "name": "observation",
+        "type": "tuple",
+        "indexed": false,
+        "internalType": "struct ObservationLib.Observation",
+        "components": [
+          {
+            "name": "cumulativeBalance",
+            "type": "uint128",
+            "internalType": "uint128"
+          },
+          {
+            "name": "balance",
+            "type": "uint96",
+            "internalType": "uint96"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TotalSupplyObservationRecorded",
+    "inputs": [
+      {
+        "name": "vault",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "balance",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      },
+      {
+        "name": "delegateBalance",
+        "type": "uint96",
+        "indexed": false,
+        "internalType": "uint96"
+      },
+      {
+        "name": "isNew",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
+      },
+      {
+        "name": "observation",
+        "type": "tuple",
+        "indexed": false,
+        "internalType": "struct ObservationLib.Observation",
+        "components": [
+          {
+            "name": "cumulativeBalance",
+            "type": "uint128",
+            "internalType": "uint128"
+          },
+          {
+            "name": "balance",
+            "type": "uint96",
+            "internalType": "uint96"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "BalanceLTAmount",
+    "inputs": [
+      {
+        "name": "balance",
+        "type": "uint96",
+        "internalType": "uint96"
+      },
+      {
+        "name": "amount",
+        "type": "uint96",
+        "internalType": "uint96"
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "internalType": "string"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "CannotTransferToSponsorshipAddress",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "DelegateBalanceLTAmount",
+    "inputs": [
+      {
+        "name": "delegateBalance",
+        "type": "uint96",
+        "internalType": "uint96"
+      },
+      {
+        "name": "delegateAmount",
+        "type": "uint96",
+        "internalType": "uint96"
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "internalType": "string"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InsufficientHistory",
+    "inputs": [
+      {
+        "name": "requestedTimestamp",
+        "type": "uint32",
+        "internalType": "PeriodOffsetRelativeTimestamp"
+      },
+      {
+        "name": "oldestTimestamp",
+        "type": "uint32",
+        "internalType": "PeriodOffsetRelativeTimestamp"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidTimeRange",
+    "inputs": [
+      {
+        "name": "start",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "end",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "PeriodLengthTooShort",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PeriodOffsetInFuture",
+    "inputs": [
+      {
+        "name": "periodOffset",
+        "type": "uint32",
+        "internalType": "uint32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "SameDelegateAlreadySet",
+    "inputs": [
+      {
+        "name": "delegate",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "TimestampNotFinalized",
+    "inputs": [
+      {
+        "name": "timestamp",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "currentOverwritePeriodStartedAt",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "TransferToZeroAddress",
+    "inputs": []
   }
 ]

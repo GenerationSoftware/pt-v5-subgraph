@@ -1,7 +1,7 @@
 import { CreatedVaultBooster } from '../../generated/VaultBoostFactory/VaultBoostFactory';
 import { VaultBooster as VaultBoosterTemplate } from '../../generated/templates';
 
-import { loadOrCreateVaultBooster } from '../helpers/vault/loadOrCreateVaultBooster';
+import { loadOrCreateVaultBooster } from '../helpers/prizeVault/loadOrCreateVaultBooster';
 
 export function handleCreatedVaultBooster(event: CreatedVaultBooster): void {
   const id = event.params.vaultBooster;
@@ -13,7 +13,7 @@ export function handleCreatedVaultBooster(event: CreatedVaultBooster): void {
 
   const vaultBooster = loadOrCreateVaultBooster(id);
   vaultBooster.prizePool = prizePool;
-  vaultBooster.vault = vault;
+  vaultBooster.prizeVault = vault;
   vaultBooster.owner = owner;
   vaultBooster.save();
 

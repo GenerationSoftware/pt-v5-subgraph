@@ -1,18 +1,18 @@
 import { Address, Bytes, BigInt } from '@graphprotocol/graph-ts';
 
-import { Vault, VaultBalanceUpdate } from '../../../generated/schema';
-import { loadOrCreateVault } from '../vault/loadOrCreateVault';
+import { PrizeVault, VaultBalanceUpdate } from '../../../generated/schema';
+import { loadOrCreatePrizeVault } from '../prizeVault/loadOrCreatePrizeVault';
 
 export const createVaultBalanceUpdate = (
   id: Bytes,
-  vault: Vault,
+  vault: PrizeVault,
   amount: BigInt,
   delegateAmount: BigInt,
   timestamp: BigInt,
   txHash: Bytes,
 ): VaultBalanceUpdate => {
   const balanceUpdate = new VaultBalanceUpdate(id);
-  balanceUpdate.vault = vault.id;
+  balanceUpdate.prizeVault = vault.id;
   balanceUpdate.amount = amount;
   balanceUpdate.delegateAmount = delegateAmount;
   balanceUpdate.balance = vault.balance;
@@ -32,7 +32,7 @@ export const updateVaultBalance = (
   txHash: Bytes,
 ): VaultBalanceUpdate => {
   // Update vault balance
-  const vault = loadOrCreateVault(vaultId);
+  const vault = loadOrCreatePrizeVault(vaultId);
   vault.balance = vault.balance.plus(amount);
   vault.delegateBalance = vault.delegateBalance.plus(delegateAmount);
   vault.save();

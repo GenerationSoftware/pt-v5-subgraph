@@ -201,7 +201,7 @@ dataSources:
         - name: PrizeVaultFactory
           file: ./abis/PrizeVaultFactory.json
       eventHandlers:
-        - event: NewPrizeVault(indexed address,indexed address,indexed address,bytes,bytes)
+        - event: NewPrizeVault(indexed address,indexed address,indexed address,string,string)
           handler: handleNewPrizeVault
           receipt: true
       file: ./src/mappings/prizeVaultFactory.ts
@@ -258,7 +258,7 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/mappings/prizeVaultBooster.ts
+      file: ./src/mappings/vaultBooster.ts
       entities:
         - VaultBooster
       abis:
