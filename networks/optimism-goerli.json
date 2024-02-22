@@ -1,11 +1,23 @@
 {
   "network": "optimism-goerli",
   "twabController": {
-    "address": "0x0b09590e2de22a629b45258812c0b25904689b5a",
-    "startBlock": "16076000"
+    "address": "0x29ed9e39390caf25e92a1ea13ed4071cd4d5f0a3",
+    "startBlock": "21569000"
   },
   "prizePool": {
-    "address": "0x8faf98698e4ff29149a8a9d06db20e3509f3754b",
-    "startBlock": "16076000"
+    "address": "0x313a6052231178840b209c92ea710569fe1d6318",
+    "startBlock": "21569000"
+  },
+  "liquidationPairFactory": {
+    "address": "0x80d11b844e46c06aead53b247be1db2ead2187a8",
+    "startBlock": "21569000"
+  },
+  "liquidationRouter": {
+    "address": "0xf712d5ecdc007c8473f64320dd045e5a5e77cf13",
+    "startBlock": "21569000"
+  },
+  "prizeVaultFactory": {
+    "address": "0x81fa585e6998c1aa9b9ac37bbce725398d99c7fd",
+    "startBlock": "21569000"
   }
 }

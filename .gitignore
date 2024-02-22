@@ -9,6 +9,7 @@ subgraph.ethereum.yaml
 subgraph.goerli.yaml
 subgraph.optimism.yaml
 subgraph.optimism-goerli.yaml
+subgraph.optimism-sepolia.yaml
 
 networks/local.json
 generated
