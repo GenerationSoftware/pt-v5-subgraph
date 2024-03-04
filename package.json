@@ -39,7 +39,7 @@
     "deploy:optimism:decentralized": "graph deploy --studio pt-v5-op subgraph.optimism.yaml",
     "deploy:arbitrum-sepolia:hosted": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ chuckbergeron/pt-v5-arb-sepolia subgraph.arbitrum-sepolia.yaml",
     "deploy:ethereum:decentralized": "graph deploy --studio pt-v5-eth subgraph.ethereum.yaml",
-    "deploy:sepolia:decentralized": "graph deploy --studio pt-v5-eth-sepolia subgraph.sepolia.yaml",
+    "deploy:sepolia:decentralized": "graph deploy --studio pt-v5-sepolia subgraph.sepolia.yaml",
     "deploy:optimism-sepolia:decentralized": "graph deploy --studio pt-v5-op-sepolia subgraph.optimism-sepolia.yaml",
     "all-optimism-goerli:decentralized": "yarn clean && yarn prepare:optimism-goerli && yarn gen:optimism-goerli && yarn deploy:optimism-goerli:decentralized",
     "all-optimism:decentralized": "yarn clean && yarn prepare:optimism && yarn gen:optimism && yarn deploy:optimism:decentralized",

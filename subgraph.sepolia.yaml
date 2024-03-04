@@ -1,0 +1,169 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: TwabController
+    network: sepolia
+    source:
+      address: "0x1f834bac8e84a4a4367025ce9e9bdce85302dfde"
+      abi: TwabController
+      startBlock: 5397000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PrizeVault
+        - User
+        - Account
+        - AccountBalanceUpdate
+        - VaultBalanceUpdate
+        - AccountObservation
+        - VaultObservation
+      abis:
+        - name: TwabController
+          file: ./abis/TwabController.json
+      eventHandlers:
+        - event: DecreasedBalance(indexed address,indexed address,uint96,uint96)
+          handler: handleDecreasedBalance
+        - event: DecreasedTotalSupply(indexed address,uint96,uint96)
+          handler: handleDecreasedTotalSupply
+        - event: Delegated(indexed address,indexed address,indexed address)
+          handler: handleDelegated
+        - event: IncreasedBalance(indexed address,indexed address,uint96,uint96)
+          handler: handleIncreasedBalance
+        - event: IncreasedTotalSupply(indexed address,uint96,uint96)
+          handler: handleIncreasedTotalSupply
+        - event: ObservationRecorded(indexed address,indexed address,uint96,uint96,bool,(uint128,uint96,uint32))
+          handler: handleObservationRecorded
+        - event: TotalSupplyObservationRecorded(indexed address,uint96,uint96,bool,(uint128,uint96,uint32))
+          handler: handleTotalSupplyObservationRecorded
+      file: ./src/mappings/twabController.ts
+  - kind: ethereum
+    name: PrizePool
+    network: sepolia
+    source:
+      address: "0x934f03f3132d3b818d7c07f25818ea3961ef18ad"
+      abi: PrizePool
+      startBlock: 5397000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PrizeClaim
+        - Draw
+      abis:
+        - name: PrizePool
+          file: ./abis/PrizePool.json
+      eventHandlers:
+        - event: ClaimedPrize(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
+          handler: handleClaimedPrize
+          receipt: true
+        - event: DrawAwarded(indexed uint24,uint256,uint8,uint8,uint104,uint128,uint48)
+          handler: handleDrawAwarded
+      file: ./src/mappings/prizePool.ts
+  - kind: ethereum
+    name: LiquidationPairFactory
+    network: sepolia
+    source:
+      address: "0x4feaaefbb5767d577547d8b1eb61bfec172a7525"
+      abi: LiquidationPairFactory
+      startBlock: 5397000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LiquidationPair
+      abis:
+        - name: LiquidationPairFactory
+          file: ./abis/LiquidationPairFactory.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,indexed address,address,uint32,uint32,uint32,int256,uint104,uint104,uint256)
+          handler: handlePairCreated
+          receipt: true
+      file: ./src/mappings/liquidationPairFactory.ts
+  - kind: ethereum
+    name: LiquidationRouter
+    network: sepolia
+    source:
+      address: "0xb0a9467863837d09e2c7a7a78f6a68f8857999af"
+      abi: LiquidationRouter
+      startBlock: 5397000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Liquidation
+      abis:
+        - name: LiquidationRouter
+          file: ./abis/LiquidationRouter.json
+      eventHandlers:
+        - event: SwappedExactAmountOut(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256)
+          handler: handleSwappedExactAmountOut
+          receipt: true
+      file: ./src/mappings/liquidationRouter.ts
+  - kind: ethereum
+    name: PrizeVaultFactory
+    network: sepolia
+    source:
+      address: "0x3874f4fd4b089e1a013b18870b2b1b83ece57349"
+      abi: PrizeVaultFactory
+      startBlock: 5397000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PrizeVault
+      abis:
+        - name: PrizeVaultFactory
+          file: ./abis/PrizeVaultFactory.json
+      eventHandlers:
+        - event: NewPrizeVault(indexed address,indexed address,indexed address,string,string)
+          handler: handleNewPrizeVault
+          receipt: true
+      file: ./src/mappings/prizeVaultFactory.ts
+
+templates:
+  - name: PrizeVault
+    kind: ethereum/contract
+    network: sepolia
+    source:
+      abi: PrizeVault
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/prizeVault.ts
+      entities:
+        - PrizeVault
+      abis:
+        - name: PrizeVault
+          file:  ./abis/PrizeVault.json
+      eventHandlers:
+        - event: LiquidationPairSet(indexed address,indexed address)
+          handler: handleLiquidationPairSet
+  - name: VaultBooster
+    kind: ethereum/contract
+    network: sepolia
+    source:
+      abi: VaultBooster
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/vaultBooster.ts
+      entities:
+        - VaultBooster
+      abis:
+        - name: VaultBooster
+          file:  ./abis/VaultBooster.json
+      eventHandlers:
+        - event: LiquidationPairSet(indexed address,indexed address)
+          handler: handleLiquidationPairSet
+        
+ 

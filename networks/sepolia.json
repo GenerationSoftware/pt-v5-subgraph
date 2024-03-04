@@ -1,7 +1,23 @@
 {
   "network": "sepolia",
-  "rngAuction": {
-    "address": "0x1a188719711d62423abf1a4de7d8aa9014a39d73",
-    "startBlock": "4647000"
+  "twabController": {
+    "address": "0x1f834bac8e84a4a4367025ce9e9bdce85302dfde",
+    "startBlock": "5397000"
+  },
+  "prizePool": {
+    "address": "0x934f03f3132d3b818d7c07f25818ea3961ef18ad",
+    "startBlock": "5397000"
+  },
+  "liquidationPairFactory": {
+    "address": "0x4feaaefbb5767d577547d8b1eb61bfec172a7525",
+    "startBlock": "5397000"
+  },
+  "liquidationRouter": {
+    "address": "0xb0a9467863837d09e2c7a7a78f6a68f8857999af",
+    "startBlock": "5397000"
+  },
+  "prizeVaultFactory": {
+    "address": "0x3874f4fd4b089e1a013b18870b2b1b83ece57349",
+    "startBlock": "5397000"
   }
 }
