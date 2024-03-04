@@ -1,23 +1,23 @@
 {
   "network": "optimism-goerli",
   "twabController": {
-    "address": "0x53f5545055f3804b7fd694081f9a13b3abceb38e",
-    "startBlock": "21785000"
+    "address": "0x221a6ad60e30c08ae54a993f32c7671ab0cd911b",
+    "startBlock": "21838700"
   },
   "prizePool": {
-    "address": "0x6cdd88a97801ad20f2dcfd14f1f9370e54757536",
-    "startBlock": "21785000"
+    "address": "0xbad6266e5293e92a50294cb17e5558a0ca859b60",
+    "startBlock": "21838700"
   },
   "liquidationPairFactory": {
-    "address": "0xa7923d5331d079f2fc300edd3594e9bbf5fbb45b",
-    "startBlock": "21785000"
+    "address": "0x358bfe19c5c83353f142f7edaca235ee0cea3d48",
+    "startBlock": "21838700"
   },
   "liquidationRouter": {
-    "address": "0xc238aa2e03ec39bf774bb18fb41997962c5ab0d3",
-    "startBlock": "21785000"
+    "address": "0xd4755870194a7cf42143d01cfe37c63d35b65ee8",
+    "startBlock": "21838700"
   },
   "prizeVaultFactory": {
-    "address": "0x644ba78d965e276c9617f18afd5357564b59a1ae",
-    "startBlock": "21785000"
+    "address": "0xdd75014791c8820c31487fc14f32b5411f1de308",
+    "startBlock": "21838700"
   }
 }
