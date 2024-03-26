@@ -1,4 +1,4 @@
-import { SwappedExactAmountOut } from '../../generated/LiquidationRouter/LiquidationRouter';
+import { SwappedExactAmountOut } from '../../generated/TpdaLiquidationRouter/TpdaLiquidationRouter';
 
 import { generateUniqueLogId } from '../helpers/common';
 import { createLiquidation } from '../helpers/liquidation/createLiquidation';

@@ -5,16 +5,12 @@ import { LiquidationPair } from '../../../generated/schema';
 export const createLiquidationPair = (
   id: Bytes,
   address: Bytes,
+  source: Bytes,
   tokenIn: Bytes,
   tokenOut: Bytes,
-  source: Bytes,
-  periodLength: BigInt,
-  firstPeriodStartsAt: BigInt,
-  targetFirstSaleTime: BigInt,
-  decayConstant: BigInt,
-  initialAmountIn: BigInt,
-  initialAmountOut: BigInt,
+  targetAuctionPeriod: BigInt,
   minimumAuctionAmount: BigInt,
+  smoothingFactor: BigInt,
   timestamp: BigInt,
   txHash: Bytes,
   gasUsed: BigInt,
@@ -22,18 +18,13 @@ export const createLiquidationPair = (
   const liquidationPair = new LiquidationPair(id);
 
   liquidationPair.address = address;
+  liquidationPair.source = source;
   liquidationPair.tokenIn = tokenIn;
   liquidationPair.tokenOut = tokenOut;
-  liquidationPair.source = source;
 
-  liquidationPair.periodLength = periodLength;
-  liquidationPair.firstPeriodStartsAt = firstPeriodStartsAt;
-  liquidationPair.targetFirstSaleTime = targetFirstSaleTime;
-
-  liquidationPair.decayConstant = decayConstant;
-  liquidationPair.initialAmountIn = initialAmountIn;
-  liquidationPair.initialAmountOut = initialAmountOut;
+  liquidationPair.targetAuctionPeriod = targetAuctionPeriod;
   liquidationPair.minimumAuctionAmount = minimumAuctionAmount;
+  liquidationPair.smoothingFactor = smoothingFactor;
 
   liquidationPair.timestamp = timestamp;
   liquidationPair.txHash = txHash;

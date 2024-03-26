@@ -184,16 +184,12 @@ type LiquidationPair @entity {
   prizeVault: PrizeVault @derivedFrom(field: "liquidationPair")
   vaultBooster: VaultBooster @derivedFrom(field: "liquidationPair")
   address: Bytes!
+  source: Bytes!
   tokenIn: Bytes!
   tokenOut: Bytes!
-  source: Bytes!
-  periodLength: BigInt!
-  firstPeriodStartsAt: BigInt!
-  targetFirstSaleTime: BigInt!
-  decayConstant: BigInt!
-  initialAmountIn: BigInt!
-  initialAmountOut: BigInt!
+  targetAuctionPeriod: BigInt!
   minimumAuctionAmount: BigInt!
+  smoothingFactor: BigInt!
   timestamp: BigInt!
   txHash: Bytes!
   gasUsed: BigInt!

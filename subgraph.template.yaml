@@ -68,14 +68,14 @@ dataSources:
           handler: handleDrawAwarded
       file: ./src/mappings/prizePool.ts
   {{/prizePool}}
-  {{#liquidationPairFactory}}
+  {{#tpdaLiquidationPairFactory}}
   - kind: ethereum
-    name: LiquidationPairFactory
+    name: TpdaLiquidationPairFactory
     network: {{network}}
     source:
-      address: "{{liquidationPairFactory.address}}"
-      abi: LiquidationPairFactory
-      startBlock: {{liquidationPairFactory.startBlock}}
+      address: "{{tpdaLiquidationPairFactory.address}}"
+      abi: TpdaLiquidationPairFactory
+      startBlock: {{tpdaLiquidationPairFactory.startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -83,22 +83,22 @@ dataSources:
       entities:
         - LiquidationPair
       abis:
-        - name: LiquidationPairFactory
-          file: ./abis/LiquidationPairFactory.json
+        - name: TpdaLiquidationPairFactory
+          file: ./abis/TpdaLiquidationPairFactory.json
       eventHandlers:
-        - event: PairCreated(indexed address,indexed address,indexed address,address,uint32,uint32,uint32,int256,uint104,uint104,uint256)
+        - event: PairCreated(indexed address,address,indexed address,indexed address,uint256,uint192,uint256)
           handler: handlePairCreated
           receipt: true
-      file: ./src/mappings/liquidationPairFactory.ts
-  {{/liquidationPairFactory}}
-  {{#liquidationRouter}}
+      file: ./src/mappings/tpdaLiquidationPairFactory.ts
+  {{/tpdaLiquidationPairFactory}}
+  {{#tpdaLiquidationRouter}}
   - kind: ethereum
-    name: LiquidationRouter
+    name: TpdaLiquidationRouter
     network: {{network}}
     source:
-      address: "{{liquidationRouter.address}}"
-      abi: LiquidationRouter
-      startBlock: {{liquidationRouter.startBlock}}
+      address: "{{tpdaLiquidationRouter.address}}"
+      abi: TpdaLiquidationRouter
+      startBlock: {{tpdaLiquidationRouter.startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -106,14 +106,14 @@ dataSources:
       entities:
         - Liquidation
       abis:
-        - name: LiquidationRouter
-          file: ./abis/LiquidationRouter.json
+        - name: TpdaLiquidationRouter
+          file: ./abis/TpdaLiquidationRouter.json
       eventHandlers:
         - event: SwappedExactAmountOut(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256)
           handler: handleSwappedExactAmountOut
           receipt: true
-      file: ./src/mappings/liquidationRouter.ts
-  {{/liquidationRouter}}
+      file: ./src/mappings/tpdaLiquidationRouter.ts
+  {{/tpdaLiquidationRouter}}
   {{#prizeVaultFactory}}
   - kind: ethereum
     name: PrizeVaultFactory
