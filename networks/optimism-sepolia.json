@@ -1,23 +1,23 @@
 {
   "network": "optimism-sepolia",
   "twabController": {
-    "address": "0xee9599e9c1a3e24d34a1019dfc7d711f2912e058",
-    "startBlock": "10535000"
+    "address": "0xe6e86a136aa9a45d11d8a5169f9fdf57704db5ca",
+    "startBlock": "10793000"
   },
   "prizePool": {
-    "address": "0x1509e03404571a17b70eae702eb5c05d3c82eae9",
-    "startBlock": "10535000"
+    "address": "0x122feca66c2b1ba8fa9c39e88152592a5496bc99",
+    "startBlock": "10793000"
   },
   "tpdaLiquidationPairFactory": {
-    "address": "0x134f92be83b69269c91298b6893e35ff0f8a7994",
-    "startBlock": "10535000"
+    "address": "0x99e05e2346885d1c1ce714c9e794a7ca6e3634b4",
+    "startBlock": "10793000"
   },
   "tpdaLiquidationRouter": {
-    "address": "0x9c030c6cfd364dd36e672d61846bb6fe060340ce",
-    "startBlock": "10535000"
+    "address": "0x4694f3cd7fedd269aaf2a168e12c544f829a6b50",
+    "startBlock": "10793000"
   },
   "prizeVaultFactory": {
-    "address": "0x003b60d1c1abb962d191f230b8b88f5a8704e666",
-    "startBlock": "10535000"
+    "address": "0x28548033b3f49b03472630ed06e8a6e92b269ce4",
+    "startBlock": "10793000"
   }
 }
