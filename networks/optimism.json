@@ -1,35 +1,23 @@
 {
   "network": "optimism",
   "twabController": {
-    "address": "0x499a9f249ec4c8ea190bebbfd96f9a83bf4f6e52",
-    "startBlock": "111036000"
+    "address": "0xcb0672de558ad8f122c0e081f0d35480ab3be167",
+    "startBlock": "118900000"
   },
   "prizePool": {
-    "address": "0xe32e5e1c5f0c80bd26def2d0ea5008c107000d6a",
-    "startBlock": "111036000"
+    "address": "0xf35fe10ffd0a9672d0095c435fd8767a7fe29b55",
+    "startBlock": "118900000"
   },
-  "rngRelayAuction": {
-    "address": "0x87d3d9afed1702728b7f280ba5c4b4c55defa557",
-    "startBlock": "111036000"
+  "tpdaLiquidationPairFactory": {
+    "address": "0x80f86691632d9863e6bcaa472e5c34574f77c7d1",
+    "startBlock": "118900000"
   },
-  "liquidationPairFactory": {
-    "address": "0x555bd8fc65e57139c9f405980c7a9526a7de8093",
-    "startBlock": "111036000"
+  "tpdaLiquidationRouter": {
+    "address": "0x7766b5e6839a1a218fc861b0810c504490876136",
+    "startBlock": "118900000"
   },
-  "liquidationRouter": {
-    "address": "0xb9fba7b2216167dcdd1a7ae0a564dd43e1b68b95",
-    "startBlock": "111036000"
-  },
-  "vaultFactory": {
-    "address": "0xf65fa202907d6046d1ef33c521889b54bde08081",
-    "startBlock": "111036000"
-  },
-  "vaultFactoryV2": {
-    "address": "0x6b17ee3a95bccd605340454c5919e693ef8eff0e",
-    "startBlock": "113710200"
-  },
-  "vaultBoostFactory": {
-    "address": "0x17b9d77a393f2aa311e5ef08b73f3239b7f66837",
-    "startBlock": "111036000"
+  "prizeVaultFactory": {
+    "address": "0xf0f151494658bae060034c8f4f199f74910ea806",
+    "startBlock": "118900000"
   }
 }
