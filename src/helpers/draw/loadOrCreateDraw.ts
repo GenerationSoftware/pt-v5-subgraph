@@ -10,6 +10,7 @@ export const createDraw = (
   reserve: BigInt,
   prizeTokensPerShare: BigInt,
   drawOpenedAt: BigInt,
+  block: BigInt,
   timestamp: BigInt,
   txHash: Bytes,
 ): Draw => {
@@ -22,7 +23,8 @@ export const createDraw = (
   newDraw.reserve = reserve;
   newDraw.prizeTokensPerShare = prizeTokensPerShare;
   newDraw.drawOpenedAt = drawOpenedAt;
-  newDraw.closedAtTimestamp = timestamp;
+  newDraw.block = block;
+  newDraw.timestamp = timestamp;
   newDraw.txHash = txHash;
   newDraw.save();
 

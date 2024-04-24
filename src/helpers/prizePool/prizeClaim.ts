@@ -16,6 +16,7 @@ export const createPrizeClaim = (
   payout: BigInt,
   claimReward: BigInt,
   claimRewardRecipientId: Bytes,
+  block: BigInt,
   timestamp: BigInt,
   txHash: Bytes,
   gasUsed: BigInt,
@@ -47,6 +48,7 @@ export const createPrizeClaim = (
   prizeClaim.payout = payout;
   prizeClaim.claimReward = claimReward;
   prizeClaim.claimRewardRecipient = claimRewardRecipientId;
+  prizeClaim.block = block;
   prizeClaim.timestamp = timestamp;
   prizeClaim.txHash = txHash;
   prizeClaim.gasUsed = gasUsed;

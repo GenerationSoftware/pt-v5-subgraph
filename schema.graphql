@@ -14,7 +14,11 @@
 type PrizeVault @entity {
   id: Bytes! # PrizeVault.address
   address: Bytes!
+  prizePool: PrizePool
   liquidationPair: LiquidationPair
+  yieldVault: Bytes # TODO: Look into making this it's own entity
+  name: String
+  symbol: String
   balance: BigInt!
   delegateBalance: BigInt!
   balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "prizeVault")
@@ -59,7 +63,8 @@ type Draw @entity {
   reserve: BigInt!
   prizeTokensPerShare: BigInt!
   drawOpenedAt: BigInt!
-  closedAtTimestamp: BigInt!
+  block: BigInt!
+  timestamp: BigInt!
   txHash: Bytes!
 }
 
@@ -75,6 +80,7 @@ type PrizeClaim @entity {
   claimReward: BigInt!
   claimRewardRecipient: Bytes! # address (who got the claim reward)
   timestamp: BigInt!
+  block: BigInt!
   txHash: Bytes!
   gasUsed: BigInt!
 }
@@ -181,7 +187,7 @@ type RngRelayReward @entity {
 type LiquidationPair @entity {
   id: Bytes! # address
   liquidations: [Liquidation!]! @derivedFrom(field: "liquidationPair")
-  prizeVault: PrizeVault @derivedFrom(field: "liquidationPair")
+  # prizeVault: PrizeVault @derivedFrom(field: "liquidationPair")
   vaultBooster: VaultBooster @derivedFrom(field: "liquidationPair")
   address: Bytes!
   source: Bytes!
@@ -219,8 +225,8 @@ type VaultBooster @entity {
   owner: Bytes
 }
 
-# TODO:
-# type PrizePool @entity {
-#   id: Bytes! # PrizePool.address
-#   address: Bytes!
-# }
+type PrizePool @entity {
+  id: Bytes! # PrizePool.address
+  address: Bytes!
+  prizeVaults: [PrizeVault!]! @derivedFrom(field: "prizePool")
+}

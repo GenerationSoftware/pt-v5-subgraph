@@ -16,6 +16,7 @@ export function handleClaimedPrize(event: ClaimedPrize): void {
   const claimReward = event.params.claimReward;
   const claimRewardRecipient = event.params.claimRewardRecipient;
 
+  const block = event.block.number;
   const timestamp = event.block.timestamp;
   const txHash = event.transaction.hash;
 
@@ -31,6 +32,7 @@ export function handleClaimedPrize(event: ClaimedPrize): void {
     payout,
     claimReward,
     claimRewardRecipient,
+    block,
     timestamp,
     txHash,
     gasUsed,
@@ -46,6 +48,7 @@ export function handleDrawAwarded(event: DrawAwarded): void {
   const prizeTokensPerShare = event.params.prizeTokensPerShare;
   const drawOpenedAt = event.params.drawOpenedAt;
 
+  const block = event.block.number;
   const timestamp = event.block.timestamp;
   const txHash = event.transaction.hash;
 
@@ -57,6 +60,7 @@ export function handleDrawAwarded(event: DrawAwarded): void {
     reserve,
     prizeTokensPerShare,
     drawOpenedAt,
+    block,
     timestamp,
     txHash,
   );

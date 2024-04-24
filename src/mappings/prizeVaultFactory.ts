@@ -5,8 +5,12 @@ import { loadOrCreatePrizeVault } from '../helpers/prizeVault/loadOrCreatePrizeV
 
 export function handleNewPrizeVault(event: NewPrizeVault): void {
   const id = event.params.vault;
+  const yieldVault = event.params.yieldVault;
+  const prizePool = event.params.prizePool;
+  const name = event.params.name;
+  const symbol = event.params.symbol;
 
-  loadOrCreatePrizeVault(id);
+  loadOrCreatePrizeVault(id, yieldVault, prizePool, name, symbol);
 
   // Start listening for events from the dynamically generated contract
   PrizeVaultTemplate.create(id);
