@@ -1,0 +1,23 @@
+{
+  "network": "base-sepolia",
+  "twabController": {
+    "address": "0x1f047db1b146c25028a7dbef9e6467e9835b024f",
+    "startBlock": "9156000"
+  },
+  "prizePool": {
+    "address": "0xc90625047f206f525a811a54bbec05c23e08b58b",
+    "startBlock": "9156000"
+  },
+  "tpdaLiquidationPairFactory": {
+    "address": "0xebbf939223adb7145e823dad6cee87db79424b1c",
+    "startBlock": "9156000"
+  },
+  "tpdaLiquidationRouter": {
+    "address": "0x926f4777c583f0c0bb11f25b3ebb0a32ed3107aa",
+    "startBlock": "9156000"
+  },
+  "prizeVaultFactory": {
+    "address": "0x8e59e973a3388eb35d0f3a74f1df32dc94bde546",
+    "startBlock": "9156000"
+  }
+}
