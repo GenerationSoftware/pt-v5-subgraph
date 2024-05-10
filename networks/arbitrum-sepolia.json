@@ -1,0 +1,23 @@
+{
+  "network": "arbitrum-sepolia",
+  "twabController": {
+    "address": "0xC91bb5ca3B0dF407Cb12C7696741A1DDA6413308",
+    "startBlock": "42351055"
+  },
+  "prizePool": {
+    "address": "0xdBBC646D78Ca1752F2DB6EA76DC467F740f9f816",
+    "startBlock": "42351055"
+  },
+  "tpdaLiquidationPairFactory": {
+    "address": "0xdDa8b566bA8456992BE1E470dd1e237D525677BD",
+    "startBlock": "42351055"
+  },
+  "tpdaLiquidationRouter": {
+    "address": "0xF1cc7c16Df4E7C2BA62EDcbe634a90dfff9DF3e4",
+    "startBlock": "42351055"
+  },
+  "prizeVaultFactory": {
+    "address": "0xFeE52eb76262E9C0e97a28ab9f2e0309B2D30CC7",
+    "startBlock": "42351055"
+  }
+}
