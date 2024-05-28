@@ -6,9 +6,9 @@ dataSources:
     name: TwabController
     network: arbitrum-sepolia
     source:
-      address: "0xC91bb5ca3B0dF407Cb12C7696741A1DDA6413308"
+      address: "0xaa465df2af3f5370b47c2b56219b4639182e5b16"
       abi: TwabController
-      startBlock: 42351055
+      startBlock: 48888000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -44,9 +44,9 @@ dataSources:
     name: PrizePool
     network: arbitrum-sepolia
     source:
-      address: "0xdBBC646D78Ca1752F2DB6EA76DC467F740f9f816"
+      address: "0x51211a6b7aa15b3f1063f151ec3343898cd7bd75"
       abi: PrizePool
-      startBlock: 42351055
+      startBlock: 48888000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -68,9 +68,9 @@ dataSources:
     name: TpdaLiquidationPairFactory
     network: arbitrum-sepolia
     source:
-      address: "0xdDa8b566bA8456992BE1E470dd1e237D525677BD"
+      address: "0xe098c4340329f0b0b72eb25e193a70eadb2499f7"
       abi: TpdaLiquidationPairFactory
-      startBlock: 42351055
+      startBlock: 48888000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -89,9 +89,9 @@ dataSources:
     name: TpdaLiquidationRouter
     network: arbitrum-sepolia
     source:
-      address: "0xF1cc7c16Df4E7C2BA62EDcbe634a90dfff9DF3e4"
+      address: "0xb420f83c5936762e6fe0ceef16440df83479d3b7"
       abi: TpdaLiquidationRouter
-      startBlock: 42351055
+      startBlock: 48888000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -110,9 +110,9 @@ dataSources:
     name: PrizeVaultFactory
     network: arbitrum-sepolia
     source:
-      address: "0xFeE52eb76262E9C0e97a28ab9f2e0309B2D30CC7"
+      address: "0x8895efb4299bce2c7e4a5c434c49534bb357bdbc"
       abi: PrizeVaultFactory
-      startBlock: 42351055
+      startBlock: 48888000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
