@@ -1,0 +1,23 @@
+{
+  "network": "arbitrum-one",
+  "twabController": {
+    "address": "0x971ecc4e75c5fcfd8fc3eadc8f0c900b5914dc75",
+    "startBlock": "216344000"
+  },
+  "prizePool": {
+    "address": "0x52e7910c4c287848c8828e8b17b8371f4ebc5d42",
+    "startBlock": "216344000"
+  },
+  "tpdaLiquidationPairFactory": {
+    "address": "0x163402522fc0c0a7863479a069a8470fb22dfd3f",
+    "startBlock": "216344000"
+  },
+  "tpdaLiquidationRouter": {
+    "address": "0x7b4a60964994422bf19ae48a90fbff806767db73",
+    "startBlock": "216344000"
+  },
+  "prizeVaultFactory": {
+    "address": "0x44be003e55e7ce8a2e0ecc3266f8a9a9de2c07bc",
+    "startBlock": "216344000"
+  }
+}
