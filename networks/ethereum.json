@@ -1,11 +1,23 @@
 {
   "network": "mainnet",
-  "rngAuction": {
-    "address": "0x539a76507f18505ca696d618f8a684814c867f41",
-    "startBlock": "18380000"
+  "twabController": {
+    "address": "0x4d5f2cd31701f3e5de77b3f89ee7b80eb87b4acc",
+    "startBlock": "20564000"
   },
-  "rngAuctionRelayerRemoteOwner": {
-    "address": "0xec9460c59cca1299b0242d6af426c21223cccd24",
-    "startBlock": "18380000"
+  "prizePool": {
+    "address": "0x7865d01da4c9ba2f69b7879e6d2483ab6b354d95",
+    "startBlock": "20564000"
+  },
+  "tpdaLiquidationPairFactory": {
+    "address": "0xa99b3a8503260ab32753c382eac297acd4a43908",
+    "startBlock": "20564000"
+  },
+  "tpdaLiquidationRouter": {
+    "address": "0x7c210be12bcef8090610914189a0de43e2192ea0",
+    "startBlock": "20564000"
+  },
+  "prizeVaultFactory": {
+    "address": "0x29c102109d6cb2d866cfec380e0e10e9a287a75f",
+    "startBlock": "20564000"
   }
 }
