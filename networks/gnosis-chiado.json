@@ -1,0 +1,23 @@
+{
+  "network": "gnosis-chiado",
+  "twabController": {
+    "address": "0x8c2a569bb0fecb37258c0984c3b52b4aedcc3e8e",
+    "startBlock": "11555000"
+  },
+  "prizePool": {
+    "address": "0x678b5a8b958e1582b2677dc21f7fdef4476d9bd7",
+    "startBlock": "11555000"
+  },
+  "tpdaLiquidationPairFactory": {
+    "address": "0x9fac7f093daa84bb4af85f8bdcfbd6a01a2ae1e3",
+    "startBlock": "11555000"
+  },
+  "tpdaLiquidationRouter": {
+    "address": "0x424a2beaafa2368700d30c7b3dd4aba89229e037",
+    "startBlock": "11555000"
+  },
+  "prizeVaultFactory": {
+    "address": "0xa056b44398fc07a7207372827d741bb914d08a5c",
+    "startBlock": "11555000"
+  }
+}
