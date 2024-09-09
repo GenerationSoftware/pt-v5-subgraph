@@ -19,5 +19,9 @@
   "prizeVaultFactory": {
     "address": "0x29c102109d6cb2d866cfec380e0e10e9a287a75f",
     "startBlock": "20564000"
+  },
+  "prizeVaultFactory2": {
+    "address": "0xd499ccf3e93f4cfb335ac388e3c896d59cdde7c3",
+    "startBlock": "20564000"
   }
 }

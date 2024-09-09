@@ -137,6 +137,29 @@ dataSources:
           receipt: true
       file: ./src/mappings/prizeVaultFactory.ts
   {{/prizeVaultFactory}}
+  {{#prizeVaultFactory2}}
+  - kind: ethereum
+    name: PrizeVaultFactory2
+    network: {{network}}
+    source:
+      address: "{{prizeVaultFactory.address}}"
+      abi: PrizeVaultFactory
+      startBlock: {{prizeVaultFactory.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PrizeVault
+      abis:
+        - name: PrizeVaultFactory
+          file: ./abis/PrizeVaultFactory.json
+      eventHandlers:
+        - event: NewPrizeVault(indexed address,indexed address,indexed address,string,string)
+          handler: handleNewPrizeVault
+          receipt: true
+      file: ./src/mappings/prizeVaultFactory.ts
+  {{/prizeVaultFactory2}}
   {{#vaultBoostFactory}}
   - kind: ethereum
     name: VaultBoostFactory
