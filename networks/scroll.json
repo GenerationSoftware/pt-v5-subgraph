@@ -1,0 +1,23 @@
+{
+  "network": "scroll",
+  "twabController": {
+    "address": "0x5ec48e749768aea9956cb38542a9837ec714537d",
+    "startBlock": "9181500"
+  },
+  "prizePool": {
+    "address": "0xa6ecd65c3eecdb59c2f74956ddf251ab5d899845",
+    "startBlock": "9181500"
+  },
+  "tpdaLiquidationPairFactory": {
+    "address": "0xf17d29f1c30da928bf98a73904681c12176de152",
+    "startBlock": "9181500"
+  },
+  "tpdaLiquidationRouter": {
+    "address": "0x6f0b0ad2047f349594c8755ac080de9288d6ef7b",
+    "startBlock": "9181500"
+  },
+  "prizeVaultFactory": {
+    "address": "0x3fdd8bfdf2f589c10c58457cdae989c7943a30a5",
+    "startBlock": "9181500"
+  }
+}
