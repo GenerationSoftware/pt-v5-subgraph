@@ -1,0 +1,23 @@
+{
+  "network": "worldchain-sepolia",
+  "twabController": {
+    "address": "0x5522c67167f90de9f302e7615ceb7da1dbf97f4b",
+    "startBlock": "3666000"
+  },
+  "prizePool": {
+    "address": "0xde1d61d479dfc0ba86ec64fd29a636993d625ce4",
+    "startBlock": "3666000"
+  },
+  "tpdaLiquidationPairFactory": {
+    "address": "0x9deead0b9e0d843991e3ba972ed10fa5222f6854",
+    "startBlock": "3666000"
+  },
+  "tpdaLiquidationRouter": {
+    "address": "0x92d603131477bf4f4ae18abd64795c77cc366858",
+    "startBlock": "3666000"
+  },
+  "prizeVaultFactory": {
+    "address": "0x533fcc9db97b6616cec4a23c6151fe2853a825b1",
+    "startBlock": "3666000"
+  }
+}
