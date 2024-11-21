@@ -15,16 +15,16 @@ type PrizeVault @entity {
   id: Bytes! # PrizeVault.address
   address: Bytes!
   prizePool: PrizePool
-  liquidationPair: LiquidationPair
+  # liquidationPair: LiquidationPair
   yieldVault: Bytes # TODO: Look into making this it's own entity
   name: String
   symbol: String
   balance: BigInt!
   delegateBalance: BigInt!
-  balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "prizeVault")
-  observations: [VaultObservation!]! @derivedFrom(field: "prizeVault")
+  # balanceUpdates: [VaultBalanceUpdate!]! @derivedFrom(field: "prizeVault")
+  # observations: [VaultObservation!]! @derivedFrom(field: "prizeVault")
   accounts: [Account!]! @derivedFrom(field: "prizeVault")
-  prizeClaims: [PrizeClaim!]! @derivedFrom(field: "prizeVault") # prize claims for this prizeVault
+  # prizeClaims: [PrizeClaim!]! @derivedFrom(field: "prizeVault") # prize claims for this prizeVault
 }
 
 type User @entity {
@@ -41,7 +41,7 @@ type Account @entity {
   balance: BigInt! # balance in account
   delegateBalance: BigInt! # amount of balance delegated to this account
   balanceUpdates: [AccountBalanceUpdate!]! @derivedFrom(field: "account")
-  observations: [AccountObservation!]! @derivedFrom(field: "account")
+  # observations: [AccountObservation!]! @derivedFrom(field: "account")
   delegators: [Account!]! @derivedFrom(field: "delegate") # accounts who delegated to this account
   #
   # TODO: Figure out why these relational fields don't work with the Account type
@@ -58,7 +58,7 @@ type Draw @entity {
   drawId: Int! # numerical draw ID for sorting
   numTiers: Int!
   lastNumTiers: Int!
-  prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
+  # prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
   winningRandomNumber: BigInt!
   reserve: BigInt!
   prizeTokensPerShare: BigInt!
@@ -68,22 +68,22 @@ type Draw @entity {
   txHash: Bytes!
 }
 
-type PrizeClaim @entity {
-  id: Bytes! # generateHashId(PrizeVault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
-  prizeVault: PrizeVault!
-  winner: Bytes! # address (who won the prize)
-  recipient: Bytes! # address (where the prize was sent)
-  draw: Draw!
-  tier: Int!
-  prizeIndex: BigInt!
-  payout: BigInt!
-  claimReward: BigInt!
-  claimRewardRecipient: Bytes! # address (who got the claim reward)
-  timestamp: BigInt!
-  block: BigInt!
-  txHash: Bytes!
-  gasUsed: BigInt!
-}
+# type PrizeClaim @entity {
+#   id: Bytes! # generateHashId(PrizeVault.address, Winner.address, Draw.drawId, PrizeClaim.tier, PrizeClaim.prizeIndex)
+#   prizeVault: PrizeVault!
+#   winner: Bytes! # address (who won the prize)
+#   recipient: Bytes! # address (where the prize was sent)
+#   draw: Draw!
+#   tier: Int!
+#   prizeIndex: BigInt!
+#   payout: BigInt!
+#   claimReward: BigInt!
+#   claimRewardRecipient: Bytes! # address (who got the claim reward)
+#   timestamp: BigInt!
+#   block: BigInt!
+#   txHash: Bytes!
+#   gasUsed: BigInt!
+# }
 
 type AccountBalanceUpdate implements BalanceUpdate @entity {
   id: Bytes! # generateHashId(tx.hash, event.logIndex)
@@ -96,38 +96,38 @@ type AccountBalanceUpdate implements BalanceUpdate @entity {
   txHash: Bytes!
 }
 
-type VaultBalanceUpdate implements BalanceUpdate @entity {
-  id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  prizeVault: PrizeVault!
-  amount: BigInt!
-  delegateAmount: BigInt!
-  balance: BigInt!
-  delegateBalance: BigInt!
-  timestamp: BigInt!
-  txHash: Bytes!
-}
+# type VaultBalanceUpdate implements BalanceUpdate @entity {
+#   id: Bytes! # generateHashId(tx.hash, event.logIndex)
+#   prizeVault: PrizeVault!
+#   amount: BigInt!
+#   delegateAmount: BigInt!
+#   balance: BigInt!
+#   delegateBalance: BigInt!
+#   timestamp: BigInt!
+#   txHash: Bytes!
+# }
 
-type AccountObservation implements Observation @entity {
-  id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  account: Account!
-  balance: BigInt!
-  delegateBalance: BigInt!
-  cumulativeBalance: BigInt!
-  timestamp: BigInt!
-  isNew: Boolean!
-  txHash: Bytes!
-}
+# type AccountObservation implements Observation @entity {
+#   id: Bytes! # generateHashId(tx.hash, event.logIndex)
+#   account: Account!
+#   balance: BigInt!
+#   delegateBalance: BigInt!
+#   cumulativeBalance: BigInt!
+#   timestamp: BigInt!
+#   isNew: Boolean!
+#   txHash: Bytes!
+# }
 
-type VaultObservation implements Observation @entity {
-  id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  prizeVault: PrizeVault!
-  balance: BigInt!
-  delegateBalance: BigInt!
-  cumulativeBalance: BigInt!
-  timestamp: BigInt!
-  isNew: Boolean!
-  txHash: Bytes!
-}
+# type VaultObservation implements Observation @entity {
+#   id: Bytes! # generateHashId(tx.hash, event.logIndex)
+#   prizeVault: PrizeVault!
+#   balance: BigInt!
+#   delegateBalance: BigInt!
+#   cumulativeBalance: BigInt!
+#   timestamp: BigInt!
+#   isNew: Boolean!
+#   txHash: Bytes!
+# }
 
 interface BalanceUpdate {
   amount: BigInt!
@@ -138,86 +138,86 @@ interface BalanceUpdate {
   txHash: Bytes!
 }
 
-interface Observation {
-  balance: BigInt!
-  delegateBalance: BigInt!
-  cumulativeBalance: BigInt!
-  timestamp: BigInt!
-  txHash: Bytes!
-}
+# interface Observation {
+#   balance: BigInt!
+#   delegateBalance: BigInt!
+#   cumulativeBalance: BigInt!
+#   timestamp: BigInt!
+#   txHash: Bytes!
+# }
 
-type RngAuction @entity {
-  id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  from: Bytes!
-  sender: Bytes!
-  recipient: Bytes!
-  sequenceId: BigInt!
-  rng: Bytes!
-  rngRequestId: BigInt!
-  elapsedTime: BigInt!
-  rewardFraction: BigInt!
-  timestamp: BigInt!
-  txHash: Bytes!
-  gasUsed: BigInt!
-}
+# type RngAuction @entity {
+#   id: Bytes! # generateHashId(tx.hash, event.logIndex)
+#   from: Bytes!
+#   sender: Bytes!
+#   recipient: Bytes!
+#   sequenceId: BigInt!
+#   rng: Bytes!
+#   rngRequestId: BigInt!
+#   elapsedTime: BigInt!
+#   rewardFraction: BigInt!
+#   timestamp: BigInt!
+#   txHash: Bytes!
+#   gasUsed: BigInt!
+# }
 
-type RngRelay @entity {
-  id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  from: Bytes!
-  messageDispatcher: Bytes!
-  remoteOwnerChainId: BigInt!
-  remoteOwner: Bytes!
-  remoteRngAuctionRelayListener: Bytes!
-  rewardRecipient: Bytes!
-  messageId: Bytes!
-  timestamp: BigInt!
-  txHash: Bytes!
-  gasUsed: BigInt!
-}
+# type RngRelay @entity {
+#   id: Bytes! # generateHashId(tx.hash, event.logIndex)
+#   from: Bytes!
+#   messageDispatcher: Bytes!
+#   remoteOwnerChainId: BigInt!
+#   remoteOwner: Bytes!
+#   remoteRngAuctionRelayListener: Bytes!
+#   rewardRecipient: Bytes!
+#   messageId: Bytes!
+#   timestamp: BigInt!
+#   txHash: Bytes!
+#   gasUsed: BigInt!
+# }
 
-type RngRelayReward @entity {
-  id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  recipient: Bytes!
-  reward: BigInt!
-  timestamp: BigInt!
-  txHash: Bytes!
-  gasUsed: BigInt!
-}
+# type RngRelayReward @entity {
+#   id: Bytes! # generateHashId(tx.hash, event.logIndex)
+#   recipient: Bytes!
+#   reward: BigInt!
+#   timestamp: BigInt!
+#   txHash: Bytes!
+#   gasUsed: BigInt!
+# }
 
-type LiquidationPair @entity {
-  id: Bytes! # address
-  liquidations: [Liquidation!]! @derivedFrom(field: "liquidationPair")
-  # prizeVault: PrizeVault @derivedFrom(field: "liquidationPair")
-  vaultBooster: VaultBooster @derivedFrom(field: "liquidationPair")
-  address: Bytes!
-  source: Bytes!
-  tokenIn: Bytes!
-  tokenOut: Bytes!
-  targetAuctionPeriod: BigInt!
-  minimumAuctionAmount: BigInt!
-  smoothingFactor: BigInt!
-  timestamp: BigInt!
-  txHash: Bytes!
-  gasUsed: BigInt!
-}
+# type LiquidationPair @entity {
+#   id: Bytes! # address
+#   liquidations: [Liquidation!]! @derivedFrom(field: "liquidationPair")
+#   # prizeVault: PrizeVault @derivedFrom(field: "liquidationPair")
+#   vaultBooster: VaultBooster @derivedFrom(field: "liquidationPair")
+#   address: Bytes!
+#   source: Bytes!
+#   tokenIn: Bytes!
+#   tokenOut: Bytes!
+#   targetAuctionPeriod: BigInt!
+#   minimumAuctionAmount: BigInt!
+#   smoothingFactor: BigInt!
+#   timestamp: BigInt!
+#   txHash: Bytes!
+#   gasUsed: BigInt!
+# }
 
-type Liquidation @entity {
-  id: Bytes! # generateHashId(tx.hash, event.logIndex)
-  liquidationPair: LiquidationPair!
-  sender: Bytes!
-  receiver: Bytes!
-  amountOut: BigInt!
-  amountInMax: BigInt!
-  amountIn: BigInt!
-  deadline: BigInt!
-  timestamp: BigInt!
-  txHash: Bytes!
-  gasUsed: BigInt!
-}
+# type Liquidation @entity {
+#   id: Bytes! # generateHashId(tx.hash, event.logIndex)
+#   liquidationPair: LiquidationPair!
+#   sender: Bytes!
+#   receiver: Bytes!
+#   amountOut: BigInt!
+#   amountInMax: BigInt!
+#   amountIn: BigInt!
+#   deadline: BigInt!
+#   timestamp: BigInt!
+#   txHash: Bytes!
+#   gasUsed: BigInt!
+# }
 
 type VaultBooster @entity {
   id: Bytes! # VaultBooster.address
-  liquidationPair: LiquidationPair
+  # liquidationPair: LiquidationPair
   address: Bytes!
   prizePool: Bytes
   # TODO: # prizePool: PrizePool!

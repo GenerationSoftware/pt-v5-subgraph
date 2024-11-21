@@ -5,6 +5,6 @@ import { loadOrCreateVaultBooster } from '../helpers/prizeVault/loadOrCreateVaul
 export function handleLiquidationPairSet(event: LiquidationPairSet): void {
   const vaultBooster = loadOrCreateVaultBooster(event.address);
 
-  vaultBooster.liquidationPair = event.params.liquidationPair;
+  // vaultBooster.liquidationPair = event.params.liquidationPair;
   vaultBooster.save();
 }
