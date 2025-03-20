@@ -1,23 +1,23 @@
 {
   "network": "worldchain-mainnet",
   "twabController": {
-    "address": "0xbae945b19c6d9b306d18da48501bf634b6a6813b",
-    "startBlock": "7013000"
+    "address": "0xa13d89cf3e7f59ba1a2b5b5c260bdfc64dd1044c",
+    "startBlock": "11500000"
   },
   "prizePool": {
-    "address": "0x628e42f94b9a7a37e8dc092aca769f30e7536ae0",
-    "startBlock": "7013000"
+    "address": "0x99ffb0a6c0cd543861c8de84dd40e059fd867dcf",
+    "startBlock": "11500000"
   },
   "tpdaLiquidationPairFactory": {
-    "address": "0x116f30f7fba68edfbd3405ed1c6a0a1ed85d25d2",
-    "startBlock": "7013000"
+    "address": "0x646c7a994e775cbe638ec91fd2625eea77df777e",
+    "startBlock": "11500000"
   },
   "tpdaLiquidationRouter": {
-    "address": "0xbe71df141a621ab07ecee32dd9e2e7029181fdf3",
-    "startBlock": "7013000"
+    "address": "0xfde1b3202ae55349bd4fecd38ca886fd1ed38e62",
+    "startBlock": "11500000"
   },
   "prizeVaultFactory": {
-    "address": "0xbe36abbd61117fd516b3c6e765fa01974e406abc",
-    "startBlock": "7013000"
+    "address": "0x08f8ebc3afc32371d40ef59a951cb7b2da425159",
+    "startBlock": "11500000"
   }
 }
